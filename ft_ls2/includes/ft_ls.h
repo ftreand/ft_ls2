@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 18:19:27 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/21 21:30:15 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,6 +65,15 @@ typedef struct	s_ls
 	struct s_ls *prev;
 }				t_ls;
 
+typedef struct	s_pad
+{
+	int lk;
+	size_t pw;
+	size_t gr;
+	int size;
+	size_t name;
+}				t_pad;
+
 typedef struct	s_flags
 {
 	int l;
@@ -82,8 +91,12 @@ char	ft_er_flag(char **av, int i, int j);
 void	ft_error_flag(char er);
 //int		ft_recup_info(char **av);
 void	ft_sort_av(char **av, char *(dup)(const char *s), int start, int *i);
-void	ft_recup_stats(char **av, int flag, int start);
+void	ft_recup_stats(char **av, t_flags fg, int start);
 int		ft_recup_start(char **av);
 void	ft_display_wrong_dir(char **av, int start);
+t_pad	*ft_padding(t_ls **ls, size_t (len)(const char *s));
+void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_pad **pad);
+int		ft_num_len(int i);
+void	ft_sort_list(t_ls ***begin);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/30 18:44:28 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 19:09:17 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/21 21:30:22 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,15 +37,10 @@ t_flags	ft_recup_char_flag(char **av, t_flags fg, int i, int j)
 {
 
 	fg.l = av[i][j] == 'l' && fg.l == 0 ? 1 : fg.l;
-	printf("fg l %d\n", fg.l);
 	fg.ur = av[i][j] == 'R' && fg.ur == 0 ? 1 : fg.ur;
-	printf("fg.R %d\n", fg.ur);
 	fg.a = av[i][j] == 'a' && fg.a == 0 ? 1 : fg.a;
-	printf("fg.a %d\n", fg.a);
 	fg.r = av[i][j] == 'r' && fg.r == 0 ? 1 : fg.r;
-	printf("fg.r %d\n", fg.r);
 	fg.t = av[i][j] == 't' && fg.t == 0 ? 1 : fg.t;
-	printf("fg.t %d\n", fg.t);
 	return (fg);
 }
 
@@ -96,23 +91,26 @@ t_flags	ft_manage_flag(char **av)
 
 	int		main(int ac, char **av)
 	{
-		int		flag;
-		//	t_ls	*ls;
+		t_flags	fg;
 		int i;
 		int start;
 
 		i = 0;
 		if (ac)
 		{
-			flag = 0;
-			if ((flag = ft_return_flag(av, &flag)) > 31)
+			fg = ft_manage_flag(av);
+			printf("fg.l %d\n", fg.l);
+			printf("fg.R %d\n", fg.ur);
+			printf("fg.a %d\n", fg.a);
+			printf("fg.r %d\n", fg.r);
+			printf("fg.t %d\n", fg.t);
+			if (fg.er)
 				return (1);
 			start = ft_recup_start(av);
 			printf("start = %d\n", start);
 			//	ls = malloc(sizeof(t_ls));
 			//	CHECK(ft_recup_info(av) == -1, 1);
-			ft_recup_stats(av, flag, start);
-//			sleep(150);
+			ft_recup_stats(av, fg, start);
 				return (0);
 			while (av[i])
 			{

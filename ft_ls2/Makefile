@@ -15,6 +15,7 @@ CC_FLAGS = -Wall -Werror -Wextra
 SRC =		main.c\
 			ft_recup_info.c\
 			ft_recup_stats.c\
+			ft_padding.c \
 
 INCLUDES_PATH = includes
 
