@@ -6,18 +6,13 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/21 15:03:58 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/21 21:30:20 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/23 14:27:07 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 #include <stdio.h>
-
-void	ft_sort_list(t_ls ***begin)
-{
-
-}
 
 int		ft_num_len(int lk)
 {

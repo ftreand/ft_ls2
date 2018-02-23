@@ -16,6 +16,7 @@ SRC =		main.c\
 			ft_recup_info.c\
 			ft_recup_stats.c\
 			ft_padding.c \
+			ft_sort_list.c \
 
 INCLUDES_PATH = includes
 

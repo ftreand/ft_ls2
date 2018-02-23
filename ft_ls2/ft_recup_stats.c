@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/14 15:27:10 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/21 21:29:57 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/23 14:32:58 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,14 +52,15 @@ char	*ft_recup_full_path(char **av, struct dirent *dirent, int start)
 	return (tmp1);
 }
 
-void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_pad **pad)
+void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags fg)
 {
 	t_fill	fill;
 	t_ls	*ls;
 	t_ls	*now;
 	t_ls	*padd;
 
-//	pad = NULL;
+	//	pad = NULL;
+	(void)fg;
 	while ((fill.dirent = readdir(dir)) != NULL)
 	{
 		if (!ls)
@@ -90,34 +91,34 @@ void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_pad **pad)
 		ft_strcpy(ls->d_name, fill.dirent->d_name);
 		//		printf("d_name = %s\n", ls->d_name);
 		ls->total += fill.stats.st_blocks;
-//		(*pad) = ft_padding(ls, (*pad));
+		//		(*pad) = ft_padding(ls, (*pad));
 		//		ls->next = NULL;
 		//		begin = !begin ? ls : begin;
 		//		ls = ls->next;
 		//		OK;
+//		ft_sort_list(begin, fg); // a faire
 	}
-	ft_sort_list(&begin);
 	padd = *begin;
-//	while ((*begin)->next)
-//		{
-//			printf("name begin = %s\n", (*begin)->d_name);
-//			*begin = (*begin)->next;
-//			OK;
-//		}
-//	while (padd != NULL)
-//		{
-//			printf("name padd = %s\n", padd->d_name);
-//			padd = padd->next;
-//			OK;
-//		}
+	//	while ((*begin)->next)
+	//		{
+	//			printf("name begin = %s\n", (*begin)->d_name);
+	//			*begin = (*begin)->next;
+	//			OK;
+	//		}
+	//	while (padd != NULL)
+	//		{
+	//			printf("name padd = %s\n", padd->d_name);
+	//			padd = padd->next;
+	//			OK;
+	//		}
 
-	(*pad) = ft_padding(&padd, ft_strlen);
-	printf("lk = %d\n", (*pad)->lk);
-	printf("pw = %zu\n", (*pad)->pw);
-	printf("gr = %zu\n", (*pad)->gr);
-	printf("size = %d\n", (*pad)->size);
+//	(*pad) = ft_padding(&padd, ft_strlen);
+//	printf("lk = %d\n", (*pad)->lk);
+//	printf("pw = %zu\n", (*pad)->pw);
+//	printf("gr = %zu\n", (*pad)->gr);
+//	printf("size = %d\n", (*pad)->size);
 	OK;
-		OK;
+	OK;
 }
 
 void	ft_pad(int i)
@@ -138,7 +139,7 @@ void	ft_display(t_ls *ls, t_flags fg, t_pad *pad)
 	}
 	while (ls != NULL)
 	{
-		
+
 		if (fg.l)
 		{
 			ft_putstr(ls->mode);
@@ -171,6 +172,7 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 	//	int start;
 	int nb_arg;
 	t_pad	*pad;
+	t_ls	*padd;
 
 	ls = NULL;
 	nb_arg = 0;
@@ -187,13 +189,26 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 	if (nb_arg == 0)
 	{
 		dir = opendir(".");
-		ft_fill_stats(dir, start, av, &ls, &pad);
+		ft_fill_stats(dir, start, av, &ls, fg);
+		padd = ls;
+		pad = ft_padding(&padd, ft_strlen);
+		printf("lk = %d\n", pad->lk);
+		printf("pw = %zu\n", pad->pw);
+		printf("gr = %zu\n", pad->gr);
+		printf("size = %d\n", pad->size);
+		OK;
+//		ft_sort_list(&ls, fg);
+//		while (ls->next)
+//		{
+//			printf("d_name = %s\n", ls->d_name);
+//			ls = ls->next;
+//		}
 		closedir(dir);
-//	printf("lk = %d\n", pad->lk);
-//	printf("pw = %zu\n", pad->pw);
-//	printf("gr = %zu\n", pad->gr);
-//	printf("size = %d\n", pad->size);
-	OK;
+		//	printf("lk = %d\n", pad->lk);
+		//	printf("pw = %zu\n", pad->pw);
+		//	printf("gr = %zu\n", pad->gr);
+		//	printf("size = %d\n", pad->size);
+		OK;
 		ft_display(ls, fg, pad);
 	}
 	printf("start = %d\n", start);
@@ -207,7 +222,8 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 				break ;
 			if (dir)
 			{
-				ft_fill_stats(dir, start, av, &ls, &pad);
+				ft_fill_stats(dir, start, av, &ls, fg);
+//				ft_sort_list(&ls, fg);
 				ft_putstr(av[start]);
 				NL;
 				ft_display(ls, fg, pad);
