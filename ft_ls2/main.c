@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/30 18:44:28 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/21 21:30:22 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/28 20:49:00 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,6 +59,8 @@ t_flags	ft_manage_flag(char **av)
 	while (av[++i] && av[i][0] == '-')
 	{
 		j = 0;
+		if (ft_strcmp(av[i], "--") == 0)
+			break ;
 		while (av[i][++j])
 		{
 			fg = ft_recup_char_flag(av, fg, i, j);
