@@ -5,8 +5,21 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/03/01 18:42:04 by ftreand      #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/06 17:16:50 by ftreand     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_recup_stats.c                                 .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/14 15:27:10 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 20:48:58 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/01 18:41:48 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -78,8 +91,8 @@ void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags fg)
 		ls->pw_name= ft_strdup(fill.passwd->pw_name);
 		ls->gr_name = ft_strdup(fill.group->gr_name);
 		ls->size = fill.stats.st_size;
-		ls->time = ft_strsub(ctime(&fill.stats.st_mtime), 4, 12);
-		ft_strcpy(ls->d_name, fill.dirent->d_name);
+		ls->time =fill.stats.st_mtime;
+			ft_strcpy(ls->d_name, fill.dirent->d_name);
 		//		printf("d_name = %s\n", ls->d_name);
 		ls->total += fill.stats.st_blocks;
 		}
@@ -101,7 +114,7 @@ void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags fg)
 		ls->pw_name= ft_strdup(fill.passwd->pw_name);
 		ls->gr_name = ft_strdup(fill.group->gr_name);
 		ls->size = fill.stats.st_size;
-		ls->time = ft_strsub(ctime(&fill.stats.st_mtime), 4, 12);
+		ls->time = fill.stats.st_mtime;
 		ft_strcpy(ls->d_name, fill.dirent->d_name);
 		//		printf("d_name = %s\n", ls->d_name);
 		ls->total += fill.stats.st_blocks;
@@ -142,8 +155,42 @@ void	ft_pad(int i)
 	}
 }
 
+void	ft_display_time(long mtime)
+{
+	int i;
+	int j;
+
+	i = 4;
+	j = 10;
+	if (mtime <= time(NULL) - 15778800)
+	{
+		while (i < j)
+			ft_putchar(ctime(&mtime)[i++]);
+		ft_putstr("  ");
+		i = 20;
+		j = 24;
+		while (i < j)
+			ft_putchar(ctime(&mtime)[i++]);
+	}
+	else
+	{
+		j = 16;
+		while (i < j)
+		{
+			ft_putchar(ctime(&mtime)[i++]);
+		}
+	}
+}
+/*
 void	ft_display(t_ls *ls, t_flags fg, t_pad *pad)
 {
+//	t_ls	*reverse;
+
+	if (fg.r)
+	{
+		while (ls->next)
+			ls = ls->next;
+	}
 	if (!fg.a)
 	{
 		while (ls->d_name[0] == '.')
@@ -161,12 +208,13 @@ void	ft_display(t_ls *ls, t_flags fg, t_pad *pad)
 			ft_putchar(' ');
 			ft_putstr(ls->pw_name);
 			ft_strlen(ls->pw_name) < pad->pw ? ft_pad(pad->pw - ft_strlen(ls->pw_name) + 1) : ft_putchar(' ');
+			SP;
 			ft_putstr(ls->gr_name);
 			ft_strlen(ls->gr_name) < pad->gr ? ft_pad(pad->gr - ft_strlen(ls->gr_name) + 1) : ft_putchar(' ');
 			ft_num_len(ls->size) < pad->size ? ft_pad(pad->size - ft_num_len(ls->size) + 1): ft_putchar(' ');
 			ft_putnbr(ls->size);
 			SP;
-			ft_putstr(ls->time);
+			ft_display_time(ls->time);
 			SP;
 		}
 		ft_putstr(ls->d_name);
@@ -174,7 +222,9 @@ void	ft_display(t_ls *ls, t_flags fg, t_pad *pad)
 		NL;
 		ls = ls->next;
 	}
-}
+	free(ls);
+	free(pad);
+}*/
 
 void	ft_recup_stats(char **av, t_flags fg, int start)
 {
@@ -182,6 +232,7 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 	DIR		*dir;
 	int i = 0;
 	//	int start;
+	
 	int nb_arg;
 	t_pad	*pad;
 	t_ls	*padd;
@@ -197,17 +248,13 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 		i++;
 	}
 	ft_display_wrong_dir(av, start);
-	printf("nb_arg = %d\n", nb_arg);
 	if (nb_arg == 0)
 	{
 		dir = opendir(".");
 		ft_fill_stats(dir, start, av, &ls, fg);
 		padd = ls;
 		pad = ft_padding(&padd, ft_strlen);
-		printf("lk = %d\n", pad->lk);
-		printf("pw = %zu\n", pad->pw);
-		printf("gr = %zu\n", pad->gr);
-		printf("size = %d\n", pad->size);
+
 //		ft_sort_list(&ls, fg);
 //		while (ls->next)
 //		{
@@ -233,9 +280,19 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 			if (dir)
 			{
 				ft_fill_stats(dir, start, av, &ls, fg);
-//				ft_sort_list(&ls, fg);
+				padd = ls;
+				if (!fg.a)
+				{
+					while (padd->d_name[0] == '.')
+						padd = padd->next;
+				}
+				pad = ft_padding(&padd, ft_strlen);
 				ft_putstr(av[start]);
 				NL;
+				printf("lk = %d\n", pad->lk);
+				printf("pw = %zu\n", pad->pw);
+				printf("gr = %zu\n", pad->gr);
+				printf("size = %d\n", pad->size);
 				ft_display(ls, fg, pad);
 				closedir(dir);
 				start++;

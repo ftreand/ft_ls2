@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 20:49:04 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/06 15:42:26 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,7 +59,7 @@ typedef struct	s_ls
 	char	*gr_name;
 	int		size;
 	int		total;
-	char	*time;
+	long	time;
 	char	d_name[256];
 	struct s_ls *next;
 	struct s_ls *prev;
@@ -98,5 +98,7 @@ t_pad	*ft_padding(t_ls **ls, size_t (len)(const char *s));
 void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags fg);
 int		ft_num_len(int i);
 void	ft_sort_list(t_ls **begin, t_ls *ls, t_flags fg);
+
+void	ft_display(t_ls *ls, t_flags fg, t_pad * pad);
 
 #endif
