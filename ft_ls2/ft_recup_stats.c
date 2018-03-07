@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/01 18:42:04 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/06 17:16:50 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/07 17:44:30 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -261,12 +261,15 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 //			printf("d_name = %s\n", ls->d_name);
 //			ls = ls->next;
 //		}
-		closedir(dir);
 		//	printf("lk = %d\n", pad->lk);
 		//	printf("pw = %zu\n", pad->pw);
 		//	printf("gr = %zu\n", pad->gr);
 		//	printf("size = %d\n", pad->size);
 		ft_display(ls, fg, pad);
+		if (fg.ur)
+			ft_recursive(dir, start, &ls, fg);
+		closedir(dir);
+
 	}
 	printf("start = %d\n", start);
 	if (nb_arg >= 1)
@@ -294,6 +297,8 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 				printf("gr = %zu\n", pad->gr);
 				printf("size = %d\n", pad->size);
 				ft_display(ls, fg, pad);
+				if (fg.ur)
+					ft_recursive(dir, start, &ls, fg);
 				closedir(dir);
 				start++;
 			}

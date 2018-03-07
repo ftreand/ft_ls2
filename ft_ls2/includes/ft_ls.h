@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/06 15:42:26 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/07 17:44:34 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,5 +100,8 @@ int		ft_num_len(int i);
 void	ft_sort_list(t_ls **begin, t_ls *ls, t_flags fg);
 
 void	ft_display(t_ls *ls, t_flags fg, t_pad * pad);
+void	ft_pad(int i);
+void	ft_display_time(long mtime);
+void	ft_recursive(DIR *dir, int start, t_ls **ls, t_flags fg);
 
 #endif

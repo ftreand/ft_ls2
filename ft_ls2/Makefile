@@ -18,6 +18,7 @@ SRC =		main.c\
 			ft_padding.c \
 			ft_sort_list.c \
 			ft_display.c \
+			ft_recursive.c \
 
 INCLUDES_PATH = includes
 
