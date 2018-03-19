@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/07 17:21:07 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/08 15:43:56 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,31 +32,41 @@ void	ft_display_l(t_ls *ls, t_pad *pad)
 	ft_putchar(' ');
 }
 
-void	ft_display_norm(t_ls *ls, t_flags fg, t_pad *pad)
+void	ft_display_norm(t_ls *ls, t_flags *fg, t_pad *pad)
 {
+	if (fg->l)
+	{
+		ft_putstr("total ");
+		ft_putendl(ft_itoa(fg->total));
+	}
 	while (ls != NULL)
 	{
-		if (!fg.a)
+		if (!fg->a)
 		{
 			while (ls->d_name[0] == '.')
 				ls = ls->next;
 		}
-		if (fg.l)
+		if (fg->l)
 			ft_display_l(ls, pad);
 		ft_putendl(ls->d_name);
 		ls = ls->next;
 	}
 }
 
-void	ft_display_reverse(t_ls *ls, t_flags fg, t_pad *pad)
+void	ft_display_reverse(t_ls *ls, t_flags *fg, t_pad *pad)
 {
+	if (fg->l)
+	{
+		ft_putstr("total ");
+		ft_putendl(ft_itoa(fg->total));
+	}
 	while (ls)
 	{
-		if (!fg.a && ls->d_name[0] == '.')
+		if (!fg->a && ls->d_name[0] == '.')
 			ls = ls->prev;
 		else
 		{
-			if (fg.l)
+			if (fg->l)
 				ft_display_l(ls, pad);
 			ft_putendl(ls->d_name);
 			ls = ls->prev;
@@ -65,9 +75,9 @@ void	ft_display_reverse(t_ls *ls, t_flags fg, t_pad *pad)
 }
 
 
-void	ft_display(t_ls *ls, t_flags fg, t_pad *pad)
+void	ft_display(t_ls *ls, t_flags *fg, t_pad *pad)
 {
-	if (fg.r)
+	if (fg->r)
 	{
 		while (ls->next)
 			ls = ls->next;

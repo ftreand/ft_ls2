@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/07 17:44:34 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/19 18:33:42 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,7 +52,7 @@ t_gr	*group;
 
 typedef struct	s_ls
 {
-	char	*path;
+	char	path[4096];
 	char	*mode;
 	int		link;
 	char	*pw_name;
@@ -61,6 +61,7 @@ typedef struct	s_ls
 	int		total;
 	long	time;
 	char	d_name[256];
+	int		type;
 	struct s_ls *next;
 	struct s_ls *prev;
 }				t_ls;
@@ -82,6 +83,7 @@ typedef struct	s_flags
 	int r;
 	int t;
 	char er;
+	int total;
 }				t_flags;
 
 int		main(int ac, char **av);
@@ -89,19 +91,23 @@ int		ft_return_flag(char **av, int *i);
 t_flags	ft_manage_flag(char **av);
 char	ft_er_flag(char **av, int i, int j);
 void	ft_error_flag(char er);
-//int		ft_recup_info(char **av);
+//int		ft_recup_info(char **av); 
 void	ft_sort_av(char **av, char *(dup)(const char *s), int start, int *i);
 void	ft_recup_stats(char **av, t_flags fg, int start);
 int		ft_recup_start(char **av);
 void	ft_display_wrong_dir(char **av, int start);
 t_pad	*ft_padding(t_ls **ls, size_t (len)(const char *s));
-void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags fg);
+void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags *fg);
 int		ft_num_len(int i);
 void	ft_sort_list(t_ls **begin, t_ls *ls, t_flags fg);
 
-void	ft_display(t_ls *ls, t_flags fg, t_pad * pad);
+void	ft_display(t_ls *ls, t_flags *fg, t_pad * pad);
 void	ft_pad(int i);
 void	ft_display_time(long mtime);
-void	ft_recursive(DIR *dir, int start, t_ls **ls, t_flags fg);
+void	ft_recursive(t_ls **ls, t_flags fg, char *path);
+void	ft_fill_struct(t_ls *ls, t_fill *fill);
+char	*ft_recup_mode(mode_t st_mode);
+void	ft_recup_full_path(char *path, char **av, struct dirent *dirent, int start);
 
+void	ft_recup_recu_path(char *ret, char *path, char *name);
 #endif

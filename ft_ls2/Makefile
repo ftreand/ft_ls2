@@ -19,6 +19,7 @@ SRC =		main.c\
 			ft_sort_list.c \
 			ft_display.c \
 			ft_recursive.c \
+			ft_fill_struct.c \
 
 INCLUDES_PATH = includes
 
@@ -29,14 +30,13 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@ echo "\033[1mCompilation de ft_ls \033[34m$<\033[37m en \033[31m$@\033[0m ✅ "
+	@ printf "\033[1mCompilation du projet \033[34m$@\033[0m \033[1men \033[31m$@\033[0m ✅\n"
 	@$(CC) $(CC_FLAGS) -o $@ $^ $(LIBFT_INC)
-
 $(LIBFT):
 	@make -C $(LIBFT_PATH)
 
 %.o: %.c ./$(INCLUDES_PATH)/$(NAME).h
-	@ echo "\033[1mCompilation de \033[33m$<\033[37m en \033[32m$@\033[0m ✅ "
+	@ printf "\033[1mCompilation de \033[36m%-20s\033[37m\ten \033[32m%-20s\033[0m ✅\n" $< $@
 	@ $(CC) $(CC_FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
