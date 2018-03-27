@@ -6,13 +6,27 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/21 15:03:58 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/07 17:44:32 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/27 15:22:05 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 #include <stdio.h>
+
+void	ft_fill_pad(t_pad *pad, t_ls **ls, size_t (len)(const char *s))
+{
+	pad->lk = ft_num_len((*ls)->link) > pad->lk ? ft_num_len((*ls)->link)
+		: pad->lk;
+	pad->pw = (len)((*ls)->pw_name) > pad->pw ? (len)((*ls)->pw_name)
+		: pad->pw;
+	pad->gr = (len)((*ls)->gr_name) > pad->gr ? (len)((*ls)->gr_name)
+		: pad->gr;
+	pad->size = ft_num_len((*ls)->size) > pad->size ?
+		ft_num_len((*ls)->size) : pad->size;
+	pad->name = (len)((*ls)->d_name) > pad->name ? (len)((*ls)->d_name)
+		: pad->name;
+}
 
 int		ft_num_len(int lk)
 {
@@ -29,7 +43,7 @@ int		ft_num_len(int lk)
 	return (i);
 }
 
-t_pad	*ft_padding(t_ls **ls, size_t (len)(const char *s))
+t_pad	*ft_padding(t_ls **ls)
 {
 	t_pad *pad;
 
@@ -47,15 +61,7 @@ t_pad	*ft_padding(t_ls **ls, size_t (len)(const char *s))
 	}
 	while (*ls != NULL)
 	{
-		pad->lk = ft_num_len((*ls)->link) > pad->lk ? ft_num_len((*ls)->link)
-			: pad->lk;
-		pad->pw = (len)((*ls)->pw_name) > pad->pw ? (len)((*ls)->pw_name)
-			: pad->pw;
-		pad->gr = (len)((*ls)->gr_name) > pad->gr ? (len)((*ls)->gr_name)
-			: pad->gr;
-		pad->size = ft_num_len((*ls)->size) > pad->size ? ft_num_len((*ls)->size)
-			: pad->size;
-		pad->name = (len)((*ls)->d_name) > pad->name ? (len)((*ls)->d_name) : pad->name;
+		ft_fill_pad(&(*pad), ls, ft_strlen);
 		*ls = (*ls)->next;
 	}
 	return (pad);
