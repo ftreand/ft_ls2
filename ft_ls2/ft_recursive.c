@@ -63,9 +63,13 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 	t_ls	*padd;
 	DIR *dir;
 
-//	printf("ls d_name = %s\n", (*ls)->d_name);
-	while (ls)
+	begin = NULL;
+	printf("ls d_name = %s\n", (*ls)->d_name);
+	printf("path = %s\n", path);
+	while ((*ls)->next)
 	{
+	OK;
+	printf("ls d_name = %s\n", (*ls)->d_name);
 //		printf("ls type = %d\n", (*ls)->type);
 //		printf("ls name = %s\n", (*ls)->d_name);
 		if ((*ls)->type == 4 && (*ls)->d_name[0] != '.')
@@ -76,7 +80,7 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 //			printf("full path = %s\n", (*ls)->path);
 			ft_fill_recursive_stats(&begin, &(*ls), dir, &fg);
 			padd = begin;
-			begin = begin->next;
+//			begin = begin->next;
 //			printf("begin d_name = %s\n", begin->d_name);
 			pad = ft_padding(&padd, ft_strlen);
 			ft_display(begin, &fg, pad);
@@ -86,9 +90,11 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 			printf("size = %d\n", pad->size);
 //			printf("fucking d_name = %s\n", begin->d_name);
 //			begin = NULL;
-			closedir(dir);
+//			closedir(dir);
+			printf("full path = %s\n", (*ls)->path);
 			printf("ls d_name = %s\n", (*ls)->d_name);
-			ft_recursive(&begin, fg, (*ls)->d_name);
+			OK;
+			ft_recursive(&begin, fg, (*ls)->path);
 		}
 		(*ls) = (*ls)->next;
 	}
