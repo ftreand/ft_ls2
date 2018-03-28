@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/30 18:44:28 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/19 14:50:19 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/27 21:40:51 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,52 +73,47 @@ t_flags	ft_manage_flag(char **av)
 		}
 		if (fg.er)
 			break ;
-		}
-		return (fg);
 	}
+	return (fg);
+}
 
-	int		ft_return_flag(char **av, int *i)
+int		ft_return_flag(char **av, int *i)
+{
+	t_flags	fg;
+
+	fg = ft_manage_flag(av);
+	*i = fg.l == 1 ? *i + low_l : *i;
+	*i = fg.ur == 1 ? *i + up_r : *i;
+	*i = fg.a == 1 ? *i + low_a : *i;
+	*i = fg.r == 1 ? *i + low_r : *i;
+	*i = fg.t == 1 ? *i + low_t : *i;
+	*i = fg.er ? *i + 32 : *i;
+	return (*i);
+}
+
+int		main(int ac, char **av)
+{
+	t_flags	fg;
+	int i;
+	int start;
+
+	i = 0;
+	if (ac)
 	{
-		t_flags	fg;
-
 		fg = ft_manage_flag(av);
-		*i = fg.l == 1 ? *i + low_l : *i;
-		*i = fg.ur == 1 ? *i + up_r : *i;
-		*i = fg.a == 1 ? *i + low_a : *i;
-		*i = fg.r == 1 ? *i + low_r : *i;
-		*i = fg.t == 1 ? *i + low_t : *i;
-		*i = fg.er ? *i + 32 : *i;
-		return (*i);
+		printf("fg.l %d\n", fg.l);
+		printf("fg.R %d\n", fg.ur);
+		printf("fg.a %d\n", fg.a);
+		printf("fg.r %d\n", fg.r);
+		printf("fg.t %d\n", fg.t);
+		if (fg.er)
+			return (1);
+		start = ft_recup_start(av);
+		printf("start = %d\n", start);
+		//	ls = malloc(sizeof(t_ls));
+		//	CHECK(ft_recup_info(av) == -1, 1);
+		ft_recup_stats(av, fg, start);
 	}
-
-	int		main(int ac, char **av)
-	{
-		t_flags	fg;
-		int i;
-		int start;
-
-		i = 0;
-		if (ac)
-		{
-			fg = ft_manage_flag(av);
-			printf("fg.l %d\n", fg.l);
-			printf("fg.R %d\n", fg.ur);
-			printf("fg.a %d\n", fg.a);
-			printf("fg.r %d\n", fg.r);
-			printf("fg.t %d\n", fg.t);
-			if (fg.er)
-				return (1);
-			start = ft_recup_start(av);
-			printf("start = %d\n", start);
-			//	ls = malloc(sizeof(t_ls));
-			//	CHECK(ft_recup_info(av) == -1, 1);
-			ft_recup_stats(av, fg, start);
-				return (0);
-			while (av[i])
-			{
-				printf("av[%d] = %s\n", i, av[i]);
-				i++;
-			}
-		}
-		return (0);
-	}
+//	sleep(150);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/23 12:29:22 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/08 16:00:40 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/21 14:25:42 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,6 @@ void	ft_add_before(t_ls *ls, t_ls *now)
 {
 	t_ls *tmp;
 
-	OK;
 	//	printf("now d_name add before = %s\n", now->d_name);
 	if (now->prev != NULL)
 	{

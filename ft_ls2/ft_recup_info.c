@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/31 19:04:02 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 20:49:02 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/27 21:01:29 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,8 +29,8 @@ void	ft_putspace(char *av, size_t j)
 
 int		ft_recup_len_max(char **av, int start)
 {
-	size_t i;
-	DIR *dir;
+	size_t	i;
+	DIR		*dir;
 
 	i = 0;
 	while (start++ < ft_tablen(av))
@@ -45,9 +45,9 @@ int		ft_recup_len_max(char **av, int start)
 
 void	ft_display_wrong_dir(char **av, int start)
 {
-	int i;
-	size_t j;
-	DIR *dir;
+	int		i;
+	size_t	j;
+	DIR		*dir;
 
 	i = start;
 	j = ft_recup_len_max(av, start);
@@ -78,15 +78,13 @@ void	ft_display_wrong_dir(char **av, int start)
 			closedir(dir);
 		start++;
 	}
-	ft_putchar('\n');
 }
 
 void	ft_sort_av(char **av, char *(dup)(const char *s), int start, int *i)
 {
-	int j;
-	char *tmp;
+	int		j;
+	char	*tmp;
 
-	printf("tablen = %d\n", ft_tablen(av));
 	while (start < ft_tablen(av))
 	{
 		j = start;
@@ -126,35 +124,5 @@ int		ft_recup_start(char **av)
 		}
 		i++;
 	}
-	printf("i = %d\n", i);
 	return (i);
 }
-
-/*int		ft_recup_info(char **av)
-{
-	int	i = 0;
-	int start;
-	int nb_arg = 0;
-//	t_dir	*dirent;
-//	DIR *dir;
-//	DIR *dir2;
-	//	while (av[i])
-	//	{
-	//		printf("before sort = %s\n", av[i]);
-	//		i++;
-	//	}
-	start = ft_recup_start(av);
-	//	while (av[++i])
-	//		printf("av = %s\n", av[i]);
-	ft_sort_av(av, ft_strdup, start, &nb_arg);
-	while (av[i])
-	{
-		printf("i = %d\n", i);
-		printf("av = %s\n", av[i]);
-		i++;
-	}
-	printf("start 1 = %d\n", start);
-	printf("nb_arg = %d\n", nb_arg);
-	ft_display_wrong_dir(av, start);
-	return (0);
-}*/

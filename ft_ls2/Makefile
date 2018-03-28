@@ -20,6 +20,7 @@ SRC =		main.c\
 			ft_display.c \
 			ft_recursive.c \
 			ft_fill_struct.c \
+			ft_free_list.c \
 
 INCLUDES_PATH = includes
 
