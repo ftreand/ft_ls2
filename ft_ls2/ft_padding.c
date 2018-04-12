@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/21 15:03:58 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/27 15:22:05 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/30 16:54:14 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,6 +46,7 @@ int		ft_num_len(int lk)
 t_pad	*ft_padding(t_ls **ls)
 {
 	t_pad *pad;
+	t_pad *ret;
 
 	pad = NULL;
 	if (!pad)
@@ -64,5 +65,7 @@ t_pad	*ft_padding(t_ls **ls)
 		ft_fill_pad(&(*pad), ls, ft_strlen);
 		*ls = (*ls)->next;
 	}
-	return (pad);
+	ret = pad;
+	free(pad);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/27 20:22:25 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/27 21:41:10 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/05 16:31:03 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,17 +16,20 @@
 
 void	ft_free_list(t_ls *ls)
 {
+	t_ls *tmp;
+
 	while (ls)
 	{
+		tmp = ls->next;
 //		printf("ls d_ddname = %s\n", ls->d_name);
 		free(ls->mode);
 		free(ls->pw_name);
 		free(ls->gr_name);
-//		free(ls);
-		ls = ls->next;
-		free(ls->path);
-//		free(tmp);
 //		printf("ls path = %s\n", ls->path);
+		free(ls->path);
+//		free(ls);
+		ls = tmp;
+//		free(tmp);
 //		free(ls->prev);
 	}
 }

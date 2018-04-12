@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/14 15:27:10 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/27 21:25:01 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/30 17:02:12 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -78,13 +78,11 @@ void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags *fg)
 		else
 		{
 			now = (t_ls*)malloc(sizeof(t_ls));;
-
 			ls = now;
 			ls->next = NULL;
 			ls->prev = NULL;
 			ft_recup_full_path(ls->path, av, fill.dirent, start);
 			ft_fill_struct(&(*ls), &fill);
-
 			(!fg->a) && ls->d_name[0] == '.' ? (fg->total += 0) : (fg->total += fill.stats.st_blocks);
 
 			ft_sort_list(&(*begin), ls, (*fg));

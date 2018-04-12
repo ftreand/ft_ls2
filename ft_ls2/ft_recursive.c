@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 17:21:16 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/27 21:37:41 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/12 16:54:47 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,6 +65,8 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 	t_ls *tmp;
 
 	tmp = *ls;
+	while (fg.r && (*ls)->next)
+		(*ls) = (*ls)->next;
 	while (ls)
 	{
 		i = 1;
@@ -80,6 +82,7 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 				ft_putendl(":");
 				ft_putstr("ls : ");
 				perror((*ls)->d_name);
+				break ;
 			}
 			else
 			{
@@ -108,6 +111,5 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 			break ;
 	}
 	*ls = tmp;
-	free(tmp);
 	ft_free_list(*ls);
 }
