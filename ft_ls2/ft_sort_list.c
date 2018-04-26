@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/23 12:29:22 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/12 16:59:33 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/26 16:44:20 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,8 @@ void	ft_add_before(t_ls *ls, t_ls *now)
 {
 	t_ls *tmp;
 
+	printf("now d_name 3 = %s\n", now->d_name);
+	printf("ls d_name 3 = %s\n", ls->d_name);
 //		printf("now d_name add before = %s\n", now->d_name);
 	if (now->prev != NULL)
 	{
@@ -32,6 +34,8 @@ void	ft_add_before(t_ls *ls, t_ls *now)
 	}
 	else
 	{
+		OK;
+		tmp = now;
 		now->prev = ls;
 		ls->prev = NULL;
 		ls->next = now;
@@ -40,7 +44,8 @@ void	ft_add_before(t_ls *ls, t_ls *now)
 
 void	ft_add_after(t_ls *ls, t_ls *now)
 {
-//	printf("now d_name = %s\n", ls->d_name);
+	printf("now d_name2 = %s\n", now->d_name);
+	printf("ls d_name 2 = %s\n", ls->d_name);
 	now->next = ls;
 	ls->prev = now;
 	ls->next = NULL;
@@ -59,19 +64,19 @@ void	ft_sort_list(t_ls **begin, t_ls *ls, t_flags fg)
 
 	(void)fg;
 	now = (*begin);
-	if (!fg.t && !fg.r)
+	if (!fg.t)
 	{
 		while (ft_strcmp(now->d_name, ls->d_name) < 0 && now->next)
 			now = now->next;
-		//	printf("now d_name after = %s\n", now->d_name);
-//			printf("ls d_name = %s\n", ls->d_name);
-//			printf("strcmp = %i\n", ft_strcmp(now->d_name, ls->d_name));
-		ft_strcmp(now->d_name, ls->d_name) > 0 && ls->d_name[0] > 46 ?
+			printf("now d_name 1 = %s\n", now->d_name);
+			printf("ls d_name 1 = %s\n", ls->d_name);
+			printf("cmp = %i\n", ft_strcmp(now->d_name, ls->d_name));
+		ft_strcmp(now->d_name, ls->d_name) > 0 ?
 			ft_add_before(ls, now) : ft_add_after(ls, now);
 	}
 /*	else if (fg.r)
 	{
-		while (ft_strcmp(now->d_name, ls->d_name) > 0 && now->next)
+		while (ft_strcmp(now->d_name, ls->d_name) < 0 && now->next)
 			now = now->next;
 		ft_strcmp(now->d_name, ls->d_name) < 0 && ls->d_name[0] > 46 ?
 			ft_add_before(ls, now) : ft_add_after(ls, now);

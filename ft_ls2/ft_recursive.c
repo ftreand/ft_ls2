@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 17:21:16 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/12 16:54:47 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/26 14:45:09 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -105,8 +105,8 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 			closedir(dir);
 			ft_recursive(&begin, fg, (*ls)->path);
 		}
-		if ((*ls)->next)
-			(*ls) = (*ls)->next;
+		if (((*ls)->next && !fg.r) || ((*ls)->prev && fg.r))
+			fg.r ? (*ls) = (*ls)->prev : ((*ls) = (*ls)->next);
 		else
 			break ;
 	}
