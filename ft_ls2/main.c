@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/30 18:44:28 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/26 14:55:00 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/02 15:37:33 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -114,6 +114,6 @@ int		main(int ac, char **av)
 		//	CHECK(ft_recup_info(av) == -1, 1);
 		ft_recup_stats(av, fg, start);
 	}
-//	sleep(100);
+	sleep(100);
 	return (0);
 }

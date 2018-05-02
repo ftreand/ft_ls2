@@ -6,13 +6,20 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/23 12:29:22 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/30 13:49:26 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/02 17:00:19 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 #include <stdio.h>
+
+void	ft_manage_begin(t_ls *now, t_ls **begin)
+{
+	while (now->prev)
+		now = now->prev;
+	begin = &now;
+}
 
 void	ft_add_before(t_ls *ls, t_ls *now)
 {
@@ -37,9 +44,11 @@ void	ft_add_before(t_ls *ls, t_ls *now)
 		OK;
 		printf("ls->dname = %s\n", ls->d_name);
 		printf("now->dname = %s\n", now->d_name);
-		now = ls;
+		now->prev = ls;
 		ls->next = now;
 		ls->prev = NULL;
+//		*begin = now;
+//		ft_manage_begin(now, &(*begin));
 	}
 }
 
@@ -52,12 +61,6 @@ void	ft_add_after(t_ls *ls, t_ls *now)
 	ls->next = NULL;
 }
 
-void	ft_manage_begin(t_ls *now, t_ls **begin)
-{
-	while (now->prev)
-		now = now->prev;
-	begin = &now;
-}
 
 void	ft_sort_list(t_ls **begin, t_ls *ls, t_flags fg)
 {

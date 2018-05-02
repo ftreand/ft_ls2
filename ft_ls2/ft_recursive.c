@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 17:21:16 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/26 14:45:09 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/02 16:58:44 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,6 +64,8 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 	int		i;
 	t_ls *tmp;
 
+	while ((*ls)->prev)
+		(*ls) = (*ls)->prev;
 	tmp = *ls;
 	while (fg.r && (*ls)->next)
 		(*ls) = (*ls)->next;

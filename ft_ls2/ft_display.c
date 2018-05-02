@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/26 16:33:55 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/02 16:55:55 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -95,6 +95,8 @@ void	ft_display(t_ls *ls, t_flags *fg, t_pad *pad)
 {
 	t_ls *tmp;
 
+	while (ls->prev)
+		ls = ls->prev;
 	tmp = ls;
 	if (fg->r)
 	{
