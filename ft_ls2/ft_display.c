@@ -6,13 +6,38 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/02 16:55:55 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 16:33:02 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 #include <stdio.h>
+
+void	ft_display_time(long mtime)
+{
+	int	i;
+	int	j;
+
+	i = 4;
+	j = 10;
+	if (mtime <= time(NULL) - 15778800)
+	{
+		while (i < j)
+			ft_putchar(ctime(&mtime)[i++]);
+		ft_putstr("  ");
+		i = 20;
+		j = 24;
+		while (i < j)
+			ft_putchar(ctime(&mtime)[i++]);
+	}
+	else
+	{
+		j = 16;
+		while (i < j)
+			ft_putchar(ctime(&mtime)[i++]);
+	}
+}
 
 void	ft_display_l(t_ls *ls, t_pad *pad)
 {
@@ -88,7 +113,6 @@ void	ft_display_reverse(t_ls *ls, t_flags *fg, t_pad *pad)
 			ls = ls->prev;
 		}
 	}
-
 }
 
 void	ft_display(t_ls *ls, t_flags *fg, t_pad *pad)
@@ -105,7 +129,6 @@ void	ft_display(t_ls *ls, t_flags *fg, t_pad *pad)
 		ft_display_reverse(ls, fg, pad);
 	}
 	else
-//	printf("ls first = %s\n", ls->d_name);
 		ft_display_norm(ls, fg, pad);
 	if (!fg->ur)
 	{

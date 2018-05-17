@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/14 15:27:10 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/19 17:59:44 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 19:11:38 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,9 +40,9 @@ char	*ft_recup_mode(mode_t st_mode)
 	return (res);
 }
 
-void	ft_recup_full_path(char *path, char **av, struct dirent *dirent, int start)
+void	ft_recup_full_path(char *path, char *av, struct dirent *dirent)
 {
-	if (!av[start])
+	if (!av || !ft_strcmp(av, dirent->d_name))
 	{
 		ft_strcpy(path, ".");
 		ft_strcat(path, "/");
@@ -50,13 +50,13 @@ void	ft_recup_full_path(char *path, char **av, struct dirent *dirent, int start)
 	}
 	else
 	{
-		ft_strcpy(path, av[start]);
+		ft_strcpy(path, av);
 		ft_strcat(path, "/");
 		ft_strcat(path, dirent->d_name);
 	}
 }
 
-void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags *fg)
+void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 {
 	t_fill	fill;
 	t_ls	*ls;
@@ -70,10 +70,11 @@ void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags *fg)
 			(*begin) = ls;
 			ls->prev = NULL;
 			ls->next = NULL;
-			ft_recup_full_path(ls->path, av, fill.dirent, start);
+			ft_recup_full_path(ls->path, av, fill.dirent);
 			ft_fill_struct(&(*ls), &fill);
 
-			(!fg->a) && ls->d_name[0] == '.' ? fg->total : (fg->total = fill.stats.st_blocks);
+			(!fg->a) && ls->d_name[0] == '.' ? fg->total :
+				(fg->total = fill.stats.st_blocks);
 		}
 		else
 		{
@@ -81,10 +82,10 @@ void	ft_fill_stats(DIR *dir, int start, char **av, t_ls **begin, t_flags *fg)
 			ls = now;
 			ls->next = NULL;
 			ls->prev = NULL;
-			ft_recup_full_path(ls->path, av, fill.dirent, start);
+			ft_recup_full_path(ls->path, av, fill.dirent);
 			ft_fill_struct(&(*ls), &fill);
-			(!fg->a) && ls->d_name[0] == '.' ? (fg->total += 0) : (fg->total += fill.stats.st_blocks);
-
+			(!fg->a) && ls->d_name[0] == '.' ? (fg->total += 0) :
+				(fg->total += fill.stats.st_blocks);
 			ft_sort_list(&(*begin), ls, (*fg));
 		}
 	}
@@ -100,123 +101,31 @@ void	ft_pad(int i)
 	}
 }
 
-void	ft_display_time(long mtime)
-{
-	int i;
-	int j;
-
-	i = 4;
-	j = 10;
-	if (mtime <= time(NULL) - 15778800)
-	{
-		while (i < j)
-			ft_putchar(ctime(&mtime)[i++]);
-		ft_putstr("  ");
-		i = 20;
-		j = 24;
-		while (i < j)
-			ft_putchar(ctime(&mtime)[i++]);
-	}
-	else
-	{
-		j = 16;
-		while (i < j)
-		{
-			ft_putchar(ctime(&mtime)[i++]);
-		}
-	}
-}
-/*
-   void	ft_display(t_ls *ls, t_flags fg, t_pad *pad)
-   {
-//	t_ls	*reverse;
-
-if (fg.r)
-{
-while (ls->next)
-ls = ls->next;
-}
-if (!fg.a)
-{
-while (ls->d_name[0] == '.')
-ls = ls->next;
-}
-while (ls != NULL)
-{
-
-if (fg.l)
-{
-ft_putstr(ls->mode);
-ft_num_len(ls->link) < pad->lk ?
-ft_pad(pad->lk - (ft_num_len(ls->link)) + 1) : ft_putchar(' ');
-ft_putnbr(ls->link);
-ft_putchar(' ');
-ft_putstr(ls->pw_name);
-ft_strlen(ls->pw_name) < pad->pw ? ft_pad(pad->pw - ft_strlen(ls->pw_name) + 1) : ft_putchar(' ');
-SP;
-ft_putstr(ls->gr_name);
-ft_strlen(ls->gr_name) < pad->gr ? ft_pad(pad->gr - ft_strlen(ls->gr_name) + 1) : ft_putchar(' ');
-ft_num_len(ls->size) < pad->size ? ft_pad(pad->size - ft_num_len(ls->size) + 1): ft_putchar(' ');
-ft_putnbr(ls->size);
-SP;
-ft_display_time(ls->time);
-SP;
-}
-ft_putstr(ls->d_name);
-SP;
-NL;
-ls = ls->next;
-}
-free(ls);
-free(pad);
-}*/
-
 void	ft_recup_stats(char **av, t_flags fg, int start)
 {
 	t_ls	*ls;
 	DIR		*dir;
 	int i = 0;
-	//	int start;
-
 	int nb_arg;
 	t_pad	*pad;
 	t_ls	*padd;
 
 	ls = NULL;
 	nb_arg = 0;
-	//	start = ft_recup_start(av);
-	ft_sort_av(av, ft_strdup, start, &nb_arg);
+	ft_sort_av(av, ft_strdup, start, &nb_arg, fg);
 	printf("start = %d\n", start);
-	//	while (av[i])
-	//	{
-	//		printf("av = %s\n", av[i]);
-	//		i++;
-	//	}
-	ft_display_wrong_dir(av, start);
+	ft_display_wrong_dir(av, start, fg);
 	if (nb_arg == 0)
 	{
 		dir = opendir(".");
-		ft_fill_stats(dir, start, av, &ls, &fg);
+		ft_fill_stats(dir, av[start], &ls, &fg);
 		padd = ls;
 		pad = ft_padding(&padd);
-
-		//		ft_sort_list(&ls, fg);
-		//		while (ls->next)
-		//		{
-		//			printf("d_name = %s\n", ls->d_name);
-		//			ls = ls->next;
-		//		}
-		//	printf("lk = %d\n", pad->lk);
-		//	printf("pw = %zu\n", pad->pw);
-		//	printf("gr = %zu\n", pad->gr);
-		//	printf("size = %d\n", pad->size);
 		ft_display(ls, &fg, pad);
 		if (fg.ur)
 			ft_recursive(&ls, fg, ".");
 		closedir(dir);
-
 	}
-	//	printf("start = %d\n", start);
 	if (nb_arg >= 1)
 	{
 		while (start < ft_tablen(av))
@@ -227,7 +136,7 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 				break ;
 			if (dir)
 			{
-				ft_fill_stats(dir, start, av, &ls, &fg);
+				ft_fill_stats(dir, av[start], &ls, &fg);
 				padd = ls;
 				if (!fg.a)
 				{
@@ -240,17 +149,11 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 					ft_putstr(av[start]);
 					ft_putendl(": ");
 				}
-				//				printf("lk = %d\n", pad->lk);
-				//				printf("pw = %zu\n", pad->pw);
-				//				printf("gr = %zu\n", pad->gr);
-				//				printf("size = %d\n", pad->size);
 				ft_display(ls, &fg, pad);
 				if (fg.ur)
 					ft_recursive(&ls, fg, av[start]);
 				if (++i != nb_arg && nb_arg != 1)
 					ft_putchar('\n');
-//				if (fg.ur)
-//					ft_recursive(&ls, fg, av[start]);
 				closedir(dir);
 				start++;
 			}

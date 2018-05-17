@@ -21,6 +21,7 @@ SRC =		main.c\
 			ft_recursive.c \
 			ft_fill_struct.c \
 			ft_free_list.c \
+			ft_error.c \
 
 INCLUDES_PATH = includes
 
