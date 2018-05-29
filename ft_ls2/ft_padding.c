@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/21 15:03:58 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 19:21:47 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/29 18:40:54 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,7 +62,6 @@ t_pad	*ft_padding(t_ls **ls)
 	}
 	while (*ls != NULL)
 	{
-		OK
 		ft_fill_pad(&(*pad), ls, ft_strlen);
 		*ls = (*ls)->next;
 	}

@@ -22,6 +22,7 @@ SRC =		main.c\
 			ft_fill_struct.c \
 			ft_free_list.c \
 			ft_error.c \
+			ft_list.c \
 
 INCLUDES_PATH = includes
 

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/14 15:27:10 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 19:11:38 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/29 16:20:46 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,7 +72,6 @@ void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 			ls->next = NULL;
 			ft_recup_full_path(ls->path, av, fill.dirent);
 			ft_fill_struct(&(*ls), &fill);
-
 			(!fg->a) && ls->d_name[0] == '.' ? fg->total :
 				(fg->total = fill.stats.st_blocks);
 		}
@@ -89,7 +88,6 @@ void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 			ft_sort_list(&(*begin), ls, (*fg));
 		}
 	}
-
 }
 
 void	ft_pad(int i)

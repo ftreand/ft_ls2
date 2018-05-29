@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/08 16:38:38 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 19:05:31 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/29 16:22:36 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,6 @@ void	ft_fill_struct(t_ls *ls, t_fill *fill)
 {
 	char *name;
 
-	printf("ls->path = %s\n", ls->path);
 	lstat(ls->path, &fill->stats);
 	if ((fill->group = getgrgid(fill->stats.st_gid)) == NULL)
 	{

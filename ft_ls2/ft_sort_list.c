@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/23 12:29:22 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 15:48:15 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/29 15:36:07 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,7 +44,6 @@ void	ft_sort_list(t_ls **begin, t_ls *ls, t_flags fg)
 {
 	t_ls *now;
 
-	(void)fg;
 	now = (*begin);
 	if (!fg.t)
 	{
