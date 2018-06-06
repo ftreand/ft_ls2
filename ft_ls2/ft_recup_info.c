@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/31 19:04:02 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/29 14:56:41 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/05 18:54:38 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,38 +43,38 @@ int		ft_recup_len_max(char **av, int start)
 	return (i);
 }
 
-void	ft_display_wrong_dir(char **av, int start, t_flags fg)
+void	ft_display_wrong_dir(char **av, t_flags fg)
 {
-	ft_errno_2(av, start);
-	ft_errno_20(av, start, fg);
-	ft_errno_13(av, start);
+	ft_errno_2(av, fg.start);
+	ft_errno_20(av, fg.start, fg);
+//	ft_errno_13(av, fg.start);
 }
 
-void	ft_sort_av(char **av, char *(dup)(const char *s), int start, int *i, t_flags fg)
+void	ft_sort_av(char **av, char *(dup)(const char *s), int *i, t_flags fg)
 {
 	int		j;
 	char	*tmp;
 
-	while (start < ft_tablen(av))
+	while (fg.start < ft_tablen(av))
 	{
-		j = start;
+		j = fg.start;
 		while (av[j])
 		{
-			if (((ft_strcmp(av[start], av[j])) < 0) && fg.r)
+			if (((ft_strcmp(av[fg.start], av[j])) < 0) && fg.r)
 			{
-				tmp = (dup)(av[start]);
-				av[start] = (dup)(av[j]);
+				tmp = (dup)(av[fg.start]);
+				av[fg.start] = (dup)(av[j]);
 				av[j] = (dup)(tmp);
 			}
-			else if ((ft_strcmp(av[start], av[j]) > 0) && !fg.r)
+			else if ((ft_strcmp(av[fg.start], av[j]) > 0) && !fg.r)
 			{
-				tmp = (dup)(av[start]);
-				av[start] = (dup)(av[j]);
+				tmp = (dup)(av[fg.start]);
+				av[fg.start] = (dup)(av[j]);
 				av[j] = (dup)(tmp);
 			}
 			j++;
 		}
-		start++;
+		fg.start++;
 		*i += 1;
 	}
 }

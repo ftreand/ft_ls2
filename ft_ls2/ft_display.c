@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/29 18:46:05 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/05 19:24:20 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,7 +83,7 @@ void	ft_display_norm(t_ls *ls, t_flags *fg, t_pad *pad)
 			}
 			if (fg->l)
 				ft_display_l(ls, pad);
-			ls->next ? ft_putendl(ls->d_name): ft_putstr(ls->d_name);
+			/*ls->next ?*/ ft_putendl(ls->d_name)/*: ft_putstr(ls->d_name)*/;
 			ls = ls->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/29 15:49:08 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/06 17:03:26 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,14 +77,14 @@ typedef struct			s_flags
 
 int						main(int ac, char **av);
 int						ft_return_flag(char **av, int *i);
-t_flags					ft_manage_flag(char **av);
+void					ft_manage_flag(char **av, t_flags *fg);
 char					ft_er_flag(char **av, int i, int j);
 void					ft_error_flag(char er);
-void					ft_sort_av(char **av, char *(dup)(const char *s),
-		int start, int *i, t_flags fg);
-void					ft_recup_stats(char **av, t_flags fg, int start);
+void					ft_sort_av(char **av, char *(dup)(const char *s), 
+		int *i, t_flags fg);
+void					ft_recup_stats(char **av, t_flags fg);
 int						ft_recup_start(char **av);
-void					ft_display_wrong_dir(char **av, int start, t_flags fg);
+void					ft_display_wrong_dir(char **av, t_flags fg);
 t_pad					*ft_padding(t_ls **ls);
 void					ft_fill_stats(DIR *dir, char *av,
 		t_ls**begin, t_flags *fg);

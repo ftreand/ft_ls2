@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/14 15:27:10 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/29 16:20:46 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/06 17:35:14 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,6 +62,7 @@ void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 	t_ls	*ls;
 	t_ls	*now;
 
+	fg->total = 0;
 	while ((fill.dirent = readdir(dir)) != NULL)
 	{
 		if (!ls)
@@ -99,24 +100,30 @@ void	ft_pad(int i)
 	}
 }
 
-void	ft_recup_stats(char **av, t_flags fg, int start)
+void	ft_recup_stats(char **av, t_flags fg)
 {
 	t_ls	*ls;
 	DIR		*dir;
-	int i = 0;
+//	int i = 0;
 	int nb_arg;
 	t_pad	*pad;
 	t_ls	*padd;
 
+	printf("l = %i\n", fg.l);
+	printf("R = %i\n", fg.ur);
+	printf("a = %i\n", fg.a);
+	printf("r = %i\n", fg.r);
+	printf("t = %i\n", fg.t);
 	ls = NULL;
 	nb_arg = 0;
-	ft_sort_av(av, ft_strdup, start, &nb_arg, fg);
-	printf("start = %d\n", start);
-	ft_display_wrong_dir(av, start, fg);
+	fg.total = 0;
+	ft_sort_av(av, ft_strdup, &nb_arg, fg);
+	printf("start = %d\n", fg.start);
+	ft_display_wrong_dir(av, fg);
 	if (nb_arg == 0)
 	{
 		dir = opendir(".");
-		ft_fill_stats(dir, av[start], &ls, &fg);
+		ft_fill_stats(dir, av[fg.start], &ls, &fg);
 		padd = ls;
 		pad = ft_padding(&padd);
 		ft_display(ls, &fg, pad);
@@ -126,15 +133,15 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 	}
 	if (nb_arg >= 1)
 	{
-		while (start < ft_tablen(av))
+		while (fg.start < ft_tablen(av))
 		{
-			while (!(dir = opendir(av[start])) && start < ft_tablen(av))
-				start++;
-			if (!av[start])
+			while (!(dir = opendir(av[fg.start])) && fg.start < ft_tablen(av))
+				fg.start++;
+			if (!av[fg.start])
 				break ;
 			if (dir)
 			{
-				ft_fill_stats(dir, av[start], &ls, &fg);
+				ft_fill_stats(dir, av[fg.start], &ls, &fg);
 				padd = ls;
 				if (!fg.a)
 				{
@@ -144,17 +151,20 @@ void	ft_recup_stats(char **av, t_flags fg, int start)
 				pad = ft_padding(&padd);
 				if (nb_arg > 1)
 				{
-					ft_putstr(av[start]);
+					ft_putchar('\n');
+					ft_putstr(av[fg.start]);
 					ft_putendl(": ");
 				}
 				ft_display(ls, &fg, pad);
 				if (fg.ur)
-					ft_recursive(&ls, fg, av[start]);
-				if (++i != nb_arg && nb_arg != 1)
-					ft_putchar('\n');
+					ft_recursive(&ls, fg, av[fg.start]);
+//				if (++i != nb_arg && nb_arg != 1)
+//					ft_putchar('\n');
 				closedir(dir);
-				start++;
+				fg.start++;
 			}
 		}
+		fg.start = ft_recup_start(av);
+		ft_errno_13(av, fg.start);
 	}
 }
