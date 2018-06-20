@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/07 17:21:16 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/06 16:43:10 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/20 15:35:14 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,11 +45,15 @@ void	ft_fill_recursive_stats(t_ls **begin, t_ls **ls, DIR *dir, t_flags *fg)
 			ft_sort_list(&(*begin), recu, (*fg));
 		}
 	}
+	while ((*begin)->prev)
+		(*begin) = (*begin)->prev;
 }
 
 void	ft_recup_recu_path(char *ret, char *path, char *name)
 {
 	ft_strcpy(ret, path);
+//	printf("name = %s\n", name);
+//	printf("ret = %s\n", ret);
 	if (ft_strcmp(ret, "/") != 0)
 		ft_strcat(ret, "/");
 	ft_strcat(ret, name);
@@ -64,15 +68,39 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 	int		i;
 	t_ls *tmp;
 
-	while ((*ls)->prev)
-		(*ls) = (*ls)->prev;
+//	printf("(*ls) dname = %s\n", (*ls)->d_name);
+//	while (!ft_strcmp((*ls)->d_name, ".") || !ft_strcmp((*ls)->d_name, ".."))
+//	{
+//		(*ls) = (*ls)->prev;
+//		if (!ft_strcmp((*ls)->d_name, ".."))
+//		{
+//		if ((*ls)->next)
+//			(*ls) = (*ls)->next;
+//			break ;
+//		}
+//	}
+//	printf("d_name = %s\n", (*ls)->d_name);
+//	printf("ls path = %s\n", (*ls)->path);
+//	printf("d_name next= %s\n", (*ls)->next->d_name);
 	tmp = *ls;
 	while (fg.r && (*ls)->next)
 		(*ls) = (*ls)->next;
 	while (ls)
 	{
+//		printf("ls->d_name = %s\n", (*ls)->d_name);
+		if ((!fg.a && (*ls)->d_name[0] == '.') || (fg.a && (!ft_strcmp((*ls)->d_name, ".") || !ft_strcmp((*ls)->d_name, ".."))))
+		{
+			if ((*ls)->next)
+			{
+				(*ls) = (*ls)->next;
+				printf("ls d_name = %s\n", (*ls)->d_name);
+				continue ;
+			}
+			else
+				break ;
+		}
 		i = 1;
-		if ((*ls)->type == 4 && (*ls)->d_name[0] != '.')
+		if ((*ls)->type == 4)
 		{
 			fg.total = 0;
 			errno = 0;
@@ -84,12 +112,12 @@ void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 				ft_putendl(":");
 				ft_putstr("ls : ");
 				perror((*ls)->d_name);
-				if ((*ls)->next)
+				if ((!fg.r && (*ls)->next) || (fg.r && (*ls)->prev))
 				{
-					(*ls) = (*ls)->next;
+					!fg.r ? (*ls) = (*ls)->next : ((*ls) = (*ls)->prev);
 					continue ;
 				}
-				else 
+				else
 					break ;
 			}
 			else

@@ -6,13 +6,22 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/21 15:03:58 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/29 18:40:54 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/19 16:19:23 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 #include <stdio.h>
+
+void	ft_padding_1(t_pad *pad)
+{
+	pad->lk = 1;
+	pad->pw = 1;
+	pad->gr = 1;
+	pad->size = 1;
+	pad->name = 1;
+}
 
 void	ft_fill_pad(t_pad *pad, t_ls **ls, size_t (len)(const char *s))
 {

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/31 19:04:02 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/05 18:54:38 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/19 15:15:14 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,7 +54,7 @@ void	ft_sort_av(char **av, char *(dup)(const char *s), int *i, t_flags fg)
 {
 	int		j;
 	char	*tmp;
-
+	(void)dup;
 	while (fg.start < ft_tablen(av))
 	{
 		j = fg.start;
@@ -62,15 +62,15 @@ void	ft_sort_av(char **av, char *(dup)(const char *s), int *i, t_flags fg)
 		{
 			if (((ft_strcmp(av[fg.start], av[j])) < 0) && fg.r)
 			{
-				tmp = (dup)(av[fg.start]);
-				av[fg.start] = (dup)(av[j]);
-				av[j] = (dup)(tmp);
+				tmp = av[fg.start];
+				av[fg.start] = av[j];
+				av[j] = tmp;
 			}
 			else if ((ft_strcmp(av[fg.start], av[j]) > 0) && !fg.r)
 			{
-				tmp = (dup)(av[fg.start]);
-				av[fg.start] = (dup)(av[j]);
-				av[j] = (dup)(tmp);
+				tmp = av[fg.start];
+				av[fg.start] = av[j];
+				av[j] = tmp;
 			}
 			j++;
 		}

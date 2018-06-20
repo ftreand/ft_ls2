@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/02/14 15:27:10 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/06 17:35:14 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/06/19 14:24:35 by ftreand      #+#   ##    ##    #+#       */
+/*   Updated: 2018/06/20 14:43:35 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,6 +89,8 @@ void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 			ft_sort_list(&(*begin), ls, (*fg));
 		}
 	}
+	while ((*begin)->prev)
+		(*begin) = (*begin)->prev;
 }
 
 void	ft_pad(int i)
@@ -104,22 +106,22 @@ void	ft_recup_stats(char **av, t_flags fg)
 {
 	t_ls	*ls;
 	DIR		*dir;
-//	int i = 0;
+	int i = 0;
 	int nb_arg;
 	t_pad	*pad;
 	t_ls	*padd;
 
-	printf("l = %i\n", fg.l);
-	printf("R = %i\n", fg.ur);
-	printf("a = %i\n", fg.a);
-	printf("r = %i\n", fg.r);
-	printf("t = %i\n", fg.t);
-	ls = NULL;
+//	printf("l = %i\n", fg.l);
+//	printf("R = %i\n", fg.ur);
+//	printf("a = %i\n", fg.a);
+//	printf("r = %i\n", fg.r);
+//	printf("t = %i\n", fg.t);
 	nb_arg = 0;
 	fg.total = 0;
 	ft_sort_av(av, ft_strdup, &nb_arg, fg);
-	printf("start = %d\n", fg.start);
+//	printf("start = %d\n", fg.start);
 	ft_display_wrong_dir(av, fg);
+	ls = NULL;
 	if (nb_arg == 0)
 	{
 		dir = opendir(".");
@@ -142,16 +144,23 @@ void	ft_recup_stats(char **av, t_flags fg)
 			if (dir)
 			{
 				ft_fill_stats(dir, av[fg.start], &ls, &fg);
+				printf("d_name = %s\n", ls->d_name);
 				padd = ls;
 				if (!fg.a)
 				{
 					while (padd->d_name[0] == '.' && padd->next)
 						padd = padd->next;
 				}
+//				printf("padd d_name = %s\n", padd->d_name);
 				pad = ft_padding(&padd);
+//				printf("pad lk = %i\n", pad->lk);
+//				printf("pad pw = %zu\n", pad->pw);
+//				printf("pad gr = %zu\n", pad->gr);
+//				printf("pad size = %i\n", pad->size);
+//				printf("pad name = %zu\n", pad->name);
 				if (nb_arg > 1)
 				{
-					ft_putchar('\n');
+					!i ?  i = 1 : ft_putchar('\n');
 					ft_putstr(av[fg.start]);
 					ft_putendl(": ");
 				}

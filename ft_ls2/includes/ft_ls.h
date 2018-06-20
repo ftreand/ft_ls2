@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/06 17:03:26 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/19 15:23:43 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@
 # include <time.h>
 # include <errno.h>
 # include <string.h>
-#define OK ft_putstr("OK");
+#define OK ft_putstr("OK\n");
 typedef struct dirent	t_dir;
 typedef struct stat		t_st;
 typedef struct passwd	t_pw;
@@ -104,8 +104,10 @@ void					ft_putspace(char *av, size_t j);
 void					ft_errno_2(char **av, int start);
 void					ft_errno_20(char **av, int start, t_flags fg);
 void					ft_errno_13(char **av, int start);
-void					ft_display_l_file(char *file, t_flags fg, t_ls *ls, t_pad *pad);
+void					ft_display_l_file(char *file, t_flags fg, t_ls *ls,
+		t_pad *pad);
 void					ft_display_l(t_ls *ls, t_pad *pad);
 void					ft_list_first(t_ls **ls, t_ls ***begin);
 void					ft_list_next(t_ls *now, t_ls *ls);
+void					ft_padding_1(t_pad *pad);
 #endif

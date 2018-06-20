@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/29 14:28:42 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/06 20:34:07 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/20 13:49:15 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,88 +19,86 @@
 void	ft_recup_name(char *file, char **name)
 {
 	int i;
-	int j;
 
 	i = ft_strlen(file);
-	j = 0;
 	while (i && file[i] != '/')
 		i--;
-	printf("file len = %zu\n", ft_strlen(file));
-	printf("i = %i\n", i);
+//	printf("file len = %zu\n", ft_strlen(file));
+//	printf("i = %i\n", i);
 	ft_ocurences(file, '/') ? i++ : i;
-	while (file[i])
-		(*name)[j++] = file[i++];
-	(*name)[j] = '\0';
+//	while (file[i])
+//		name[j++] = file[i++];
+	ft_strcpy((*name), file + i);
+//	name[j] = '\0';
 }
 
-/*void	ft_file_w_path(t_ls *ls, char *file)
+void	ft_recup_file_path(char *file, char **name)
 {
-	int i;
-	int j;
-	char name[4096];
-	DIR *dir;
+	size_t i;
 
-	(void)ls;
 	i = ft_strlen(file);
-	j = 0;
-	printf("file = %s\n", file);
-	printf("i = %i\n", i);
-	while (file[i] != '/')
+	while (i && file[i] != '/')
 		i--;
-	printf("i = %i\n", i);
-	while (j <= i)
-	{
-		ls->path[j] = file[j];
-		j++;
-	}
-	i = 0;
-	while (file[j])
-		name[i++] = file[j++];
-	name[i] = '\0';
-	printf("ls->path = %s\n", ls->path);
-	printf("name = %s\n", name);
-	dir = opendir(ls->path);
-	
-}*/
+	i++;
+	ft_strncpy((*name), file, i);
 
+}
 
 void	ft_display_l_file(char *file, t_flags fg, t_ls *ls, t_pad *pad)
 {
 	DIR		*dir;
 	t_fill	fill;
-	t_ls *padd;
+//	t_ls *padd;
 	char *name;
 
 	(void)fg;
-	pad = NULL;
+//	pad = NULL;
+//	printf("file = %s\n", file);
 	ls = (t_ls*)malloc(sizeof(t_ls));
 	name = (char*)malloc(sizeof(char*) * (ft_strlen(file) + 1));
 	if (!ft_ocurences(file, '/') || (file[0] == '.' && file[1] == '/'))
 	{
 		dir = opendir(".");
-		OK
 		ft_recup_name(file, &name);
-		printf("name = %s\n", name);
+//		printf("name = %s\n", name);
+		if (dir)
+		{
+			while ((fill.dirent = readdir(dir)) != NULL)
+			{
+				if (!ft_strcmp(fill.dirent->d_name, name))
+				{
+					ft_recup_full_path(ls->path, name, fill.dirent);
+//					printf("ls path =%s\n", ls->path);
+					ft_fill_struct(ls, &fill);
+//					printf("ls->pw_name = %s\n", ls->d_name);
+					break ;
+				}
+			}
+			if (dir)
+				closedir(dir);
+		}
+	}
+	else if ((file[0] != '.' && ft_ocurences(file, '/')) || (file[1] == '.' &&
+			file[0] == '.' && ft_ocurences(file, '/')))
+	{
+		ft_recup_file_path(file, &name);
+		dir = opendir(name);
+		ft_recup_name(file, &name);
 		while ((fill.dirent = readdir(dir)) != NULL)
 		{
 			if (!ft_strcmp(fill.dirent->d_name, name))
 			{
-				ft_recup_full_path(ls->path, name, fill.dirent);
-				printf("ls path =%s\n", ls->path);
+				ft_strcpy(ls->path, file);
 				ft_fill_struct(ls, &fill);
-				padd = ls;
-				pad = ft_padding(&padd);
-				break ;
 			}
 		}
 		closedir(dir);
 	}
-//	else if (file[0] != '.' && ft_ocurences(file, '/'))
-//		ft_file_w_path(&(*ls), file);
+	ft_padding_1(pad);
 	ft_display_l(ls, pad);
-	ft_ocurences(file, '/') ? ft_putendl(ls->path) : ft_putendl(ls->d_name);
-	free(name);
-	ft_free_list(ls);
+	ft_ocurences(file, '/') ? ft_putendl(file) : ft_putendl(ls->d_name);
+	ft_strdel(&name);
+	ft_free_list(&(*ls));
 }
 
 void	ft_errno_2(char **av, int start)
@@ -128,11 +126,14 @@ void	ft_errno_20(char **av, int start, t_flags fg)
 	DIR *dir;
 	t_ls ls;
 	t_pad pad;
+	int i;
 
+	i = 0;
 	while (av[start])
 	{
 		errno = 0;
 		dir = opendir(av[start]);
+		errno == 0 ? i = 1 : i;
 		if (errno == 20 && !fg.l)
 			ft_putendl(av[start]);
 		else if (errno == 20 && fg.l)
@@ -141,6 +142,8 @@ void	ft_errno_20(char **av, int start, t_flags fg)
 			closedir(dir);
 		start++;
 	}
+	if (!i)
+		ft_putchar('\n');
 }
 
 void	ft_errno_13(char **av, int start)
