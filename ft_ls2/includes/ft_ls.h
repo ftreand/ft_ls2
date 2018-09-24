@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/19 15:23:43 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/24 19:00:04 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@
 # include <time.h>
 # include <errno.h>
 # include <string.h>
-#define OK ft_putstr("OK\n");
+
 typedef struct dirent	t_dir;
 typedef struct stat		t_st;
 typedef struct passwd	t_pw;
@@ -73,6 +73,8 @@ typedef struct			s_flags
 	char				er;
 	int					total;
 	int					start;
+	int					nb_arg;
+	int					i;
 }						t_flags;
 
 int						main(int ac, char **av);
@@ -80,8 +82,7 @@ int						ft_return_flag(char **av, int *i);
 void					ft_manage_flag(char **av, t_flags *fg);
 char					ft_er_flag(char **av, int i, int j);
 void					ft_error_flag(char er);
-void					ft_sort_av(char **av, char *(dup)(const char *s), 
-		int *i, t_flags fg);
+void					ft_sort_av(char **av, int *i, t_flags fg);
 void					ft_recup_stats(char **av, t_flags fg);
 int						ft_recup_start(char **av);
 void					ft_display_wrong_dir(char **av, t_flags fg);
@@ -101,13 +102,24 @@ void					ft_recup_full_path(char *path, char *av
 void					ft_recup_recu_path(char *ret, char *path, char *name);
 void					ft_free_list(t_ls *ls);
 void					ft_putspace(char *av, size_t j);
-void					ft_errno_2(char **av, int start);
-void					ft_errno_20(char **av, int start, t_flags fg);
+void					ft_errno_2(char **av, int start, int *i);
+void					ft_errno_20(char **av, int start, t_flags fg, int *i);
 void					ft_errno_13(char **av, int start);
-void					ft_display_l_file(char *file, t_flags fg, t_ls *ls,
+void					ft_display_l_file(char *file, t_ls *ls,
 		t_pad *pad);
 void					ft_display_l(t_ls *ls, t_pad *pad);
-void					ft_list_first(t_ls **ls, t_ls ***begin);
-void					ft_list_next(t_ls *now, t_ls *ls);
 void					ft_padding_1(t_pad *pad);
+void					ft_print_base(char *s);
+void					ft_print_file0(char *file, char *name, t_ls *ls);
+void					ft_print_file1(char *file, char *name, t_ls *ls);
+void					ft_recup_file_path(char *file, char **name);
+void					ft_recup_name(char *file, char **name);
+void					ft_fill(t_ls *ls, char *av, t_fill fill, t_flags *fg);
+void					ft_manage_begin(t_ls **begin);
+void					ft_no_arg(char *av, t_ls *ls, t_flags fg);
+void					ft_with_arg(DIR *dir, char *av, t_ls *ls, t_flags *fg);
+void					ft_opti_recu0(t_flags fg, t_ls **ls, t_ls *padd, t_ls
+		*begin);
+void					ft_opti_recu_error(t_ls **ls, t_flags fg);
+void					ft_manage_reverse(t_ls **ls);
 #endif

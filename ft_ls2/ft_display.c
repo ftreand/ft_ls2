@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/20 14:41:57 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/24 17:07:35 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,24 +41,18 @@ void	ft_display_time(long mtime)
 
 void	ft_display_l(t_ls *ls, t_pad *pad)
 {
-//	printf("pad->lk = %i\n", pad->lk);
-//	printf("pad->pw = %zu\n", pad->pw);
-//	printf("pad->gr = %zu\n", pad->gr);
-//	printf("pad->size = %i\n", pad->size);
 	ft_putstr(ls->mode);
 	ft_putchar(' ');
 	(ft_num_len(ls->link) < pad->lk) ? ft_pad(pad->lk -
 			ft_num_len(ls->link) + 1) : ft_putchar(' ');
 	ft_putnbr(ls->link);
 	ft_putchar(' ');
-
 	ft_putstr(ls->pw_name);
 	ft_strlen(ls->pw_name) < pad->pw ? ft_pad(pad->pw - ft_strlen(ls->pw_name)
 			+ 2) : ft_putstr("  ");
 	ft_putstr(ls->gr_name);
 	ft_strlen(ls->gr_name) < pad->gr ? ft_pad(pad->gr - ft_strlen(ls->gr_name)
 			+ 1) : ft_putchar(' ');
-
 	ft_num_len(ls->size) < pad->size ? ft_pad(pad->size - ft_num_len(ls->size)
 			+ 1) : ft_putchar(' ');
 	ft_putnbr(ls->size);
@@ -75,21 +69,20 @@ void	ft_display_norm(t_ls *ls, t_flags *fg, t_pad *pad)
 	while (ls)
 	{
 		if (!fg->a && ls->d_name[0] == '.')
-		{
 			ls = ls->next;
-		}
 		else
 		{
 			if (!i && fg->l)
 			{
 				ft_putstr("total ");
 				ft_putnbr(fg->total);
+				fg->total = 0;
 				ft_putchar('\n');
 				i = 1;
 			}
 			if (fg->l)
 				ft_display_l(ls, pad);
-			/*ls->next ?*/ ft_putendl(ls->d_name)/*: ft_putstr(ls->d_name)*/;
+			ft_putendl(ls->d_name);
 			ls = ls->next;
 		}
 	}
@@ -110,6 +103,7 @@ void	ft_display_reverse(t_ls *ls, t_flags *fg, t_pad *pad)
 			{
 				ft_putstr("total ");
 				ft_putnbr(fg->total);
+				fg->total = 0;
 				ft_putchar('\n');
 				i = 1;
 			}

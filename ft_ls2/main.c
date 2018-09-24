@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/30 18:44:28 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/20 13:40:48 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/24 16:37:29 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,9 +70,7 @@ void	ft_manage_flag(char **av, t_flags *fg)
 int		main(int ac, char **av)
 {
 	t_flags	fg;
-	int		i;
 
-	i = 0;
 	if (ac)
 	{
 		fg.l = 0;
@@ -80,12 +78,12 @@ int		main(int ac, char **av)
 		fg.a = 0;
 		fg.r = 0;
 		fg.t = 0;
+		fg.i = 0;
 		ft_manage_flag(av, &fg);
 		if (fg.er)
 			return (1);
 		fg.start = ft_recup_start(av);
 		ft_recup_stats(av, fg);
 	}
-//	sleep(15);
 	return (0);
 }
