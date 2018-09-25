@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 16:58:34 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/24 19:29:10 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/25 15:55:31 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,32 +39,48 @@ void	ft_manage_reverse(t_ls **ls)
 
 void	ft_manage_no_a(t_flags fg, t_ls **ls)
 {
-	printf("name a manage = %s\n", (*ls)->d_name);
-	while (ls)
+	while (!fg.a && (*ls)->d_name[0] == '.')
 	{
-		if (!fg.a && (*ls)->d_name[0] == '.')
+		if (((*ls)->prev && fg.r) || ((*ls)->next && !fg.r))
 			(*ls) = fg.r ? (*ls)->prev : (*ls)->next;
 		else
 			break ;
 	}
-	printf("name a manage 2= %s\n", (*ls)->d_name);
+}
+
+void	ft_recursive1(t_ls **ls, t_flags fg, char *path)
+{
+	DIR		*dir;
+
+	while (ls)
+	{
+		ft_manage_no_a(fg, &(*ls));
+		if ((*ls) && ((*ls)->type == 4 && ((*ls)->d_name[0] != '.'
+						|| (((*ls)->d_name[1] && (*ls)->d_name[1] != '.')))))
+		{
+			errno = 0;
+			dir = opendir((*ls)->path);
+			if (errno)
+				ft_recursive_error(ls, fg);
+			else
+				ft_recursive_no_error(ls, fg, path, dir);
+		}
+		if ((((*ls)->next) && !fg.r) || ((*ls)->prev && fg.r))
+			(*ls) = fg.r ? (*ls)->prev : (*ls)->next;
+		else
+			break ;
+	}
 }
 
 void	ft_recursive(t_ls **ls, t_flags fg, char *path)
 {
 	t_ls	*tmp;
-	(void)path;
 
 	tmp = (*ls);
-	printf("new dname = %s\n", (*ls)->d_name);
-	while (ls)
-	{
-		ft_manage_no_a(fg, &(*ls));
-		printf("name = %s\n", (*ls)->d_name);
-		fg.i = 1;
-		if ((*ls)->type == 4 && ((*ls)->d_name[0] != '.' || (((*ls)->d_name[1] && (*ls)->d_name[1] != '.'))))
-		{
-
-		}
-	}
+	if (fg.r)
+		ft_manage_reverse(&(*ls));
+	fg.i = 1;
+	ft_recursive1(ls, fg, path);
+	(*ls) = tmp;
+	ft_free_list((*ls));
 }

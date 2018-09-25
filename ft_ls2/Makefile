@@ -25,6 +25,7 @@ SRC =		main.c\
 			ft_opti.c \
 			ft_opti2.c \
 			ft_opti_recu.c \
+			ft_opti_recu2.c \
 
 INCLUDES_PATH = includes
 

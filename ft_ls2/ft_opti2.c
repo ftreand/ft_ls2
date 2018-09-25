@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 15:09:04 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/24 19:29:51 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/25 16:34:07 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,8 +39,6 @@ void	ft_no_arg(char *av, t_ls *ls, t_flags fg)
 	padd = ls;
 	pad = ft_padding(&padd);
 	ft_display(ls, &fg, pad);
-	if (fg.r)
-		ft_manage_reverse(&ls);
 	if (fg.ur)
 		ft_recursive(&ls, fg, ".");
 	closedir(dir);
@@ -64,8 +62,6 @@ void	ft_with_arg(DIR *dir, char *av, t_ls *ls, t_flags *fg)
 		ft_putendl(": ");
 	}
 	ft_display(ls, &(*fg), pad);
-	if (fg->r)
-		ft_manage_reverse(&ls);
 	if (fg->ur)
 		ft_recursive(&ls, (*fg), av);
 	closedir(dir);

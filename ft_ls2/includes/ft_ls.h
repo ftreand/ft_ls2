@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/24 19:00:04 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/25 15:51:11 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -122,4 +122,9 @@ void					ft_opti_recu0(t_flags fg, t_ls **ls, t_ls *padd, t_ls
 		*begin);
 void					ft_opti_recu_error(t_ls **ls, t_flags fg);
 void					ft_manage_reverse(t_ls **ls);
+void					ft_recursive_error(t_ls **ls, t_flags fg);
+void					ft_recursive_no_error(t_ls **ls, t_flags fg,
+		char *path, DIR *dir);
+void					ft_fill_recursive_stats(t_ls **begin, t_ls **ls,
+		DIR *dir, t_flags *fg);
 #endif
