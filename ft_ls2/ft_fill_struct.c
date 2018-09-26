@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/08 16:38:38 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/20 18:51:45 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/26 15:49:18 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,25 +14,42 @@
 #include "includes/ft_ls.h"
 #include <stdio.h>
 
-void	ft_fill_struct(t_ls *ls, t_fill *fill)
+
+void	ft_fill_gr(t_fill *fill, t_ls *ls)
 {
 	char *name;
 
+	name = ft_itoa(fill->stats.st_uid);
+	ls->pw_name = ft_strdup(name);
+	free(name);
+}
+
+void	ft_fill_pw(t_fill *fill, t_ls *ls)
+{
+	char *name;
+
+	name = ft_itoa(fill->stats.st_uid);
+	ls->pw_name = ft_strdup(name);
+	free(name);
+}
+
+void	ft_recup_link(t_ls *ls, char *s)
+{
+	readlink(ls->path, ls->lk, 4096);
+	ft_strcpy(ls->d_name, s);
+
+}
+
+void	ft_fill_struct(t_ls *ls, t_fill *fill)
+{
+
 	lstat(ls->path, &(fill->stats));
 	if ((fill->group = getgrgid(fill->stats.st_gid)) == NULL)
-	{
-		name = ft_itoa(fill->stats.st_gid);
-		ls->gr_name = ft_strdup(name);
-		free(name);
-	}
+		ft_fill_gr(fill, ls);
 	else
 		ls->gr_name = ft_strdup(fill->group->gr_name);
 	if ((fill->passwd = getpwuid(fill->stats.st_uid)) == NULL)
-	{
-		name = ft_itoa(fill->stats.st_uid);
-		ls->pw_name = ft_strdup(name);
-		free(name);
-	}
+		ft_fill_pw(fill, ls);
 	else
 		ls->pw_name = ft_strdup(fill->passwd->pw_name);
 	ls->type = fill->dirent->d_type;
@@ -40,5 +57,6 @@ void	ft_fill_struct(t_ls *ls, t_fill *fill)
 	ls->link = fill->stats.st_nlink;
 	ls->size = fill->stats.st_size;
 	ls->time = fill->stats.st_mtime;
-	ft_strcpy(ls->d_name, fill->dirent->d_name);
+	ls->mode[0] == 'l' ? ft_recup_link(ls, fill->dirent->d_name) :
+			ft_strcpy(ls->d_name, fill->dirent->d_name);
 }

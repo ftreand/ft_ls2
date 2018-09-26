@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 16:43:21 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/25 15:59:20 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/26 16:14:12 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 
 char	*ft_recup_mode(mode_t st_mode)
 {
-	char str[11];
+	char str[12];
 	char *res;
 
 	str[0] = (st_mode & S_IFMT) == S_IFIFO ? 'p' : str[0];
@@ -35,7 +35,9 @@ char	*ft_recup_mode(mode_t st_mode)
 	str[7] = st_mode & S_IROTH ? 'r' : '-';
 	str[8] = st_mode & S_IWOTH ? 'w' : '-';
 	str[9] = st_mode & S_IXOTH ? 'x' : '-';
-	str[10] = '\0';
+	str[9] = st_mode & S_ISVTX ? 't' : str[9];
+	str[10] = st_mode & S_IFLNK ? '@' : ' ';
+	str[11] = '\0';
 	res = ft_strdup(str);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/25 15:51:11 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/26 16:04:44 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,6 +49,7 @@ typedef struct			s_ls
 	int					total;
 	long				time;
 	char				d_name[256];
+	char				lk[4096];
 	int					type;
 	struct s_ls			*next;
 	struct s_ls			*prev;
@@ -70,6 +71,7 @@ typedef struct			s_flags
 	int					a;
 	int					r;
 	int					t;
+	int					k;
 	char				er;
 	int					total;
 	int					start;
@@ -127,4 +129,6 @@ void					ft_recursive_no_error(t_ls **ls, t_flags fg,
 		char *path, DIR *dir);
 void					ft_fill_recursive_stats(t_ls **begin, t_ls **ls,
 		DIR *dir, t_flags *fg);
+void					ft_display_color(t_flags *fg, char *s, char *mode, char
+		*lk);
 #endif
