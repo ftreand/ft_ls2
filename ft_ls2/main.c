@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/30 18:44:28 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/26 11:23:56 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/27 17:19:42 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,8 @@ char	ft_er_flag(char **av, int i, int j)
 	char	c;
 
 	c = av[i][j] != 'l' && av[i][j] != 'R' && av[i][j] != 'a' && av[i][j] !=
-		'r' && av[i][j] != 't' && av[i][j] != 'k' && av[i][j] != '-' ? av[i][j]
+		'r' && av[i][j] != 't' && av[i][j] != 'k' && av[i][j] != 'i'
+		&& av[i][j] != '-' ? av[i][j]
 		: '\0';
 	c = (av[i][j] == '-' && av[i][j + 1] != '\0') ? av[i][j] : c;
 	return (c);
@@ -41,6 +42,7 @@ void	ft_recup_char_flag(char **av, t_flags *fg, int i, int j)
 	fg->r = av[i][j] == 'r' && fg->r == 0 ? 1 : fg->r;
 	fg->t = av[i][j] == 't' && fg->t == 0 ? 1 : fg->t;
 	fg->k = av[i][j] == 'k' && fg->k == 0 ? 1 : fg->k;
+	fg->in = av[i][j] == 'i' && fg->in == 0 ? 1 : fg->in;
 }
 
 void	ft_manage_flag(char **av, t_flags *fg)
@@ -84,6 +86,7 @@ int		main(int ac, char **av)
 		fg.k = 0;
 		ft_manage_flag(av, &fg);
 		printf("fg.k = %d\n", fg.k);
+		printf("fg.in = %d\n", fg.in);
 		if (fg.er)
 			return (1);
 		fg.start = ft_recup_start(av);

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/26 16:04:44 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/27 17:29:31 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,6 +43,7 @@ typedef struct			s_ls
 	char				path[4096];
 	char				*mode;
 	int					link;
+	int					node;
 	char				*pw_name;
 	char				*gr_name;
 	int					size;
@@ -60,6 +61,7 @@ typedef struct			s_pad
 	int					lk;
 	size_t				pw;
 	size_t				gr;
+	int					in;
 	int					size;
 	size_t				name;
 }						t_pad;
@@ -72,6 +74,7 @@ typedef struct			s_flags
 	int					r;
 	int					t;
 	int					k;
+	int					in;
 	char				er;
 	int					total;
 	int					start;
@@ -131,4 +134,8 @@ void					ft_fill_recursive_stats(t_ls **begin, t_ls **ls,
 		DIR *dir, t_flags *fg);
 void					ft_display_color(t_flags *fg, char *s, char *mode, char
 		*lk);
+void					ft_print_bold_cyan(char *s);
+void					ft_print_exec_file(char *s);
+void					ft_print_socket(char *s);
+void					ft_print_node(int i, t_pad *pad);
 #endif

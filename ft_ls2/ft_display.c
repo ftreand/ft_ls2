@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/26 15:51:44 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/27 17:34:51 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,7 +42,6 @@ void	ft_display_time(long mtime)
 void	ft_display_l(t_ls *ls, t_pad *pad)
 {
 	ft_putstr(ls->mode);
-//	ft_putchar(' ');
 	(ft_num_len(ls->link) < pad->lk) ? ft_pad(pad->lk -
 			ft_num_len(ls->link) + 1) : ft_putchar(' ');
 	ft_putnbr(ls->link);
@@ -80,6 +79,8 @@ void	ft_display_norm(t_ls *ls, t_flags *fg, t_pad *pad)
 				ft_putchar('\n');
 				i = 1;
 			}
+			if (fg->in)
+				ft_print_node(ls->node, pad);
 			if (fg->l)
 				ft_display_l(ls, pad);
 			ft_display_color(fg, ls->d_name, ls->mode, ls->lk);
@@ -107,6 +108,8 @@ void	ft_display_reverse(t_ls *ls, t_flags *fg, t_pad *pad)
 				ft_putchar('\n');
 				i = 1;
 			}
+			if (fg->in)
+				ft_print_node(ls->node, pad);
 			if (fg->l)
 				ft_display_l(ls, pad);
 			ft_display_color(fg, ls->d_name, ls->mode, ls->lk);

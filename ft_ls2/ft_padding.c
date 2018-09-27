@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/21 15:03:58 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/24 13:25:39 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/27 17:28:06 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,8 @@ void	ft_fill_pad(t_pad *pad, t_ls **ls, size_t (len)(const char *s))
 		ft_num_len((*ls)->size) : pad->size;
 	pad->name = (len)((*ls)->d_name) > pad->name ? (len)((*ls)->d_name)
 		: pad->name;
+	pad->in = ft_num_len((*ls)->node) > pad->in ? ft_num_len((*ls)->node) :
+		pad->in;
 }
 
 int		ft_num_len(int lk)
@@ -65,6 +67,7 @@ t_pad	*ft_padding(t_ls **ls)
 		pad->lk = ft_num_len((*ls)->link);
 		pad->pw = ft_strlen((*ls)->pw_name);
 		pad->gr = ft_strlen((*ls)->gr_name);
+		pad->in = ft_num_len((*ls)->node);
 		pad->size = ft_num_len((*ls)->size);
 		pad->name = ft_strlen((*ls)->d_name);
 		*ls = (*ls)->next;

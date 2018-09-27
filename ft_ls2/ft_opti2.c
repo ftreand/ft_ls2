@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 15:09:04 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/25 16:34:07 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/27 17:35:11 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,4 +66,16 @@ void	ft_with_arg(DIR *dir, char *av, t_ls *ls, t_flags *fg)
 		ft_recursive(&ls, (*fg), av);
 	closedir(dir);
 	fg->start++;
+}
+
+void	ft_print_node(int i, t_pad *pad)
+{
+	if (ft_num_len(i) < pad->in)
+	{
+		ft_pad(pad->in - ft_num_len(i));
+		ft_putnbr(i);
+	}
+	else
+		ft_putnbr(i);
+	ft_putchar(' ');
 }

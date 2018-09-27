@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/08 16:38:38 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/26 15:49:18 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/27 17:35:28 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,7 +42,6 @@ void	ft_recup_link(t_ls *ls, char *s)
 
 void	ft_fill_struct(t_ls *ls, t_fill *fill)
 {
-
 	lstat(ls->path, &(fill->stats));
 	if ((fill->group = getgrgid(fill->stats.st_gid)) == NULL)
 		ft_fill_gr(fill, ls);
@@ -53,6 +52,7 @@ void	ft_fill_struct(t_ls *ls, t_fill *fill)
 	else
 		ls->pw_name = ft_strdup(fill->passwd->pw_name);
 	ls->type = fill->dirent->d_type;
+	ls->node = fill->stats.st_ino;
 	ls->mode = ft_recup_mode(fill->stats.st_mode);
 	ls->link = fill->stats.st_nlink;
 	ls->size = fill->stats.st_size;
