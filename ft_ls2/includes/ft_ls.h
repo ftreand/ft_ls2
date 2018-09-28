@@ -44,6 +44,7 @@ typedef struct			s_ls
 	char				*mode;
 	int					link;
 	int					node;
+	int					block;
 	char				*pw_name;
 	char				*gr_name;
 	int					size;
@@ -62,6 +63,7 @@ typedef struct			s_pad
 	size_t				pw;
 	size_t				gr;
 	int					in;
+	int					blk;
 	int					size;
 	size_t				name;
 }						t_pad;
@@ -75,6 +77,8 @@ typedef struct			s_flags
 	int					t;
 	int					k;
 	int					in;
+	int					s;
+	int					us;
 	char				er;
 	int					total;
 	int					start;
@@ -137,5 +141,5 @@ void					ft_display_color(t_flags *fg, char *s, char *mode, char
 void					ft_print_bold_cyan(char *s);
 void					ft_print_exec_file(char *s);
 void					ft_print_socket(char *s);
-void					ft_print_node(int i, t_pad *pad);
+void					ft_print_node(int j, int i, t_pad *pad, t_flags *fg);
 #endif

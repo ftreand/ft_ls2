@@ -68,14 +68,28 @@ void	ft_with_arg(DIR *dir, char *av, t_ls *ls, t_flags *fg)
 	fg->start++;
 }
 
-void	ft_print_node(int i, t_pad *pad)
+void	ft_print_node(int j, int i, t_pad *pad, t_flags *fg)
 {
-	if (ft_num_len(i) < pad->in)
+	if (fg->in)
 	{
-		ft_pad(pad->in - ft_num_len(i));
-		ft_putnbr(i);
+		if (ft_num_len(i) < pad->in)
+		{
+			ft_pad(pad->in - ft_num_len(i));
+			ft_putnbr(i);
+		}
+		else
+			ft_putnbr(i);
+		ft_putchar(' ');
 	}
-	else
-		ft_putnbr(i);
-	ft_putchar(' ');
+	if (fg->s)
+	{
+		if (ft_num_len(j) , pad->blk)
+		{
+			ft_pad(pad->blk - ft_num_len(j));
+			ft_putnbr(j);
+		}
+		else
+			ft_putnbr(j);
+		ft_putchar(' ');
+	}
 }

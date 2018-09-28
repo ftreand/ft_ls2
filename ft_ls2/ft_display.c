@@ -79,8 +79,8 @@ void	ft_display_norm(t_ls *ls, t_flags *fg, t_pad *pad)
 				ft_putchar('\n');
 				i = 1;
 			}
-			if (fg->in)
-				ft_print_node(ls->node, pad);
+			if (fg->in || fg->s)
+				ft_print_node(ls->block, ls->node, pad, fg);
 			if (fg->l)
 				ft_display_l(ls, pad);
 			ft_display_color(fg, ls->d_name, ls->mode, ls->lk);
@@ -109,7 +109,7 @@ void	ft_display_reverse(t_ls *ls, t_flags *fg, t_pad *pad)
 				i = 1;
 			}
 			if (fg->in)
-				ft_print_node(ls->node, pad);
+				ft_print_node(ls->block, ls->node, pad, fg);
 			if (fg->l)
 				ft_display_l(ls, pad);
 			ft_display_color(fg, ls->d_name, ls->mode, ls->lk);

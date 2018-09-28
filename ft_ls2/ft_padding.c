@@ -37,6 +37,8 @@ void	ft_fill_pad(t_pad *pad, t_ls **ls, size_t (len)(const char *s))
 		: pad->name;
 	pad->in = ft_num_len((*ls)->node) > pad->in ? ft_num_len((*ls)->node) :
 		pad->in;
+	pad->blk = ft_num_len((*ls)->block) > pad->blk ? ft_num_len((*ls)->block) :
+	pad->blk;
 }
 
 int		ft_num_len(int lk)
@@ -70,6 +72,7 @@ t_pad	*ft_padding(t_ls **ls)
 		pad->in = ft_num_len((*ls)->node);
 		pad->size = ft_num_len((*ls)->size);
 		pad->name = ft_strlen((*ls)->d_name);
+		pad->blk = ft_num_len((*ls)->block);
 		*ls = (*ls)->next;
 	}
 	while (*ls != NULL)

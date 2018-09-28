@@ -27,8 +27,8 @@ char	ft_er_flag(char **av, int i, int j)
 	char	c;
 
 	c = av[i][j] != 'l' && av[i][j] != 'R' && av[i][j] != 'a' && av[i][j] !=
-		'r' && av[i][j] != 't' && av[i][j] != 'k' && av[i][j] != 'i'
-		&& av[i][j] != '-' ? av[i][j]
+		'r' && av[i][j] != 't' && av[i][j] != 'k' && av[i][j] != 'i' &&
+		av[i][j] != 's' && av[i][j] != 'S' && av[i][j] != '-' ? av[i][j]
 		: '\0';
 	c = (av[i][j] == '-' && av[i][j + 1] != '\0') ? av[i][j] : c;
 	return (c);
@@ -43,6 +43,8 @@ void	ft_recup_char_flag(char **av, t_flags *fg, int i, int j)
 	fg->t = av[i][j] == 't' && fg->t == 0 ? 1 : fg->t;
 	fg->k = av[i][j] == 'k' && fg->k == 0 ? 1 : fg->k;
 	fg->in = av[i][j] == 'i' && fg->in == 0 ? 1 : fg->in;
+	fg->s = av[i][j] == 's' && fg->s == 0 ? 1 : fg->s;
+	fg->us = av[i][j] == 'S' && fg->us == 0 ? 1 : fg->us;
 }
 
 void	ft_manage_flag(char **av, t_flags *fg)
@@ -84,9 +86,10 @@ int		main(int ac, char **av)
 		fg.t = 0;
 		fg.i = 0;
 		fg.k = 0;
+		fg.s = 0;
+		fg.us = 0;
 		ft_manage_flag(av, &fg);
-		printf("fg.k = %d\n", fg.k);
-		printf("fg.in = %d\n", fg.in);
+		printf("fg.s = %d\n", fg.s);
 		if (fg.er)
 			return (1);
 		fg.start = ft_recup_start(av);

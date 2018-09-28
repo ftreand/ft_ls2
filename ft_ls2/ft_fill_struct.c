@@ -53,6 +53,7 @@ void	ft_fill_struct(t_ls *ls, t_fill *fill)
 		ls->pw_name = ft_strdup(fill->passwd->pw_name);
 	ls->type = fill->dirent->d_type;
 	ls->node = fill->stats.st_ino;
+	ls->block = (int)fill->stats.st_blocks;
 	ls->mode = ft_recup_mode(fill->stats.st_mode);
 	ls->link = fill->stats.st_nlink;
 	ls->size = fill->stats.st_size;
