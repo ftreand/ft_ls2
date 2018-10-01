@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/29 14:28:42 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/24 18:30:55 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/01 21:43:13 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,7 +64,7 @@ void	ft_errno_2(char **av, int start, int *i)
 	{
 		errno = 0;
 		dir = opendir(av[start]);
-		*i = errno == 2 ? 1 : *i;
+		*i = errno == 2 ? *i += 1 : *i;
 		if (errno == 2)
 		{
 			ft_putstr("ls: ");
@@ -87,7 +87,7 @@ void	ft_errno_20(char **av, int start, t_flags fg, int *i)
 	{
 		errno = 0;
 		dir = opendir(av[start]);
-		*i = errno == 20 ? 1 : *i;
+		*i = errno == 20 ? *i += 1 : *i;
 		if (errno == 20 && !fg.l)
 			ft_putendl(av[start]);
 		else if (errno == 20 && fg.l)
@@ -96,6 +96,6 @@ void	ft_errno_20(char **av, int start, t_flags fg, int *i)
 			closedir(dir);
 		start++;
 	}
-	if (*i)
+	if (*i < fg.nb_arg && *i)
 		ft_putchar('\n');
 }

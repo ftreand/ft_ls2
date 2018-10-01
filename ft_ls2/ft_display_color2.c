@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/27 15:54:30 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/27 17:04:00 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/01 22:41:29 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,4 +32,13 @@ void	ft_print_socket(char *s)
 	ft_putstr("\033[0;32m");
 	ft_putendl(s);
 	ft_putstr("\033[0m");
+}
+
+void	ft_print_blue_blue_bg(char *s)
+{
+	ft_putstr("\x1b[46m");
+	ft_putstr("\x1b[34m");
+	ft_putstr(s);
+	ft_putstr("\033[0m");
+	ft_putchar('\n');
 }

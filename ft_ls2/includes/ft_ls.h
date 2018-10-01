@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/27 17:29:31 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/01 22:55:48 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,6 +48,8 @@ typedef struct			s_ls
 	char				*pw_name;
 	char				*gr_name;
 	int					size;
+	int					major;
+	int					minor;
 	int					total;
 	long				time;
 	char				d_name[256];
@@ -65,6 +67,8 @@ typedef struct			s_pad
 	int					in;
 	int					blk;
 	int					size;
+//	int					minor;
+//	int					major;
 	size_t				name;
 }						t_pad;
 
@@ -79,6 +83,7 @@ typedef struct			s_flags
 	int					in;
 	int					s;
 	int					us;
+	int					one;
 	char				er;
 	int					total;
 	int					start;
@@ -113,7 +118,7 @@ void					ft_free_list(t_ls *ls);
 void					ft_putspace(char *av, size_t j);
 void					ft_errno_2(char **av, int start, int *i);
 void					ft_errno_20(char **av, int start, t_flags fg, int *i);
-void					ft_errno_13(char **av, int start);
+void					ft_errno_13(char **av, t_flags fg);
 void					ft_display_l_file(char *file, t_ls *ls,
 		t_pad *pad);
 void					ft_display_l(t_ls *ls, t_pad *pad);
@@ -142,4 +147,5 @@ void					ft_print_bold_cyan(char *s);
 void					ft_print_exec_file(char *s);
 void					ft_print_socket(char *s);
 void					ft_print_node(int j, int i, t_pad *pad, t_flags *fg);
+void					ft_print_blue_blue_bg(char *s);
 #endif

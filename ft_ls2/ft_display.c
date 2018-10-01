@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/27 17:34:51 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/01 23:02:15 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,7 +71,7 @@ void	ft_display_norm(t_ls *ls, t_flags *fg, t_pad *pad)
 			ls = ls->next;
 		else
 		{
-			if (!i && fg->l)
+			if (!i && fg->l && !fg->one)
 			{
 				ft_putstr("total ");
 				fg->k ? ft_putnbr(fg->total / 2) : ft_putnbr(fg->total);
@@ -81,7 +81,7 @@ void	ft_display_norm(t_ls *ls, t_flags *fg, t_pad *pad)
 			}
 			if (fg->in || fg->s)
 				ft_print_node(ls->block, ls->node, pad, fg);
-			if (fg->l)
+			if (fg->l && !fg->one)
 				ft_display_l(ls, pad);
 			ft_display_color(fg, ls->d_name, ls->mode, ls->lk);
 			ls = ls->next;
@@ -100,17 +100,17 @@ void	ft_display_reverse(t_ls *ls, t_flags *fg, t_pad *pad)
 			ls = ls->prev;
 		else
 		{
-			if (!i && fg->l)
+			if (!i && fg->l && !fg->one)
 			{
 				ft_putstr("total ");
-				fg->k ? ft_putnbr(fg->total / 2) :ft_putnbr(fg->total);
+				fg->k ? ft_putnbr(fg->total / 2) : ft_putnbr(fg->total);
 				fg->total = 0;
 				ft_putchar('\n');
 				i = 1;
 			}
 			if (fg->in)
 				ft_print_node(ls->block, ls->node, pad, fg);
-			if (fg->l)
+			if (fg->l && !fg->one)
 				ft_display_l(ls, pad);
 			ft_display_color(fg, ls->d_name, ls->mode, ls->lk);
 			ls = ls->prev;

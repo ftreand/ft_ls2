@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 15:09:04 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/27 17:35:11 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/01 19:58:45 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,7 +83,7 @@ void	ft_print_node(int j, int i, t_pad *pad, t_flags *fg)
 	}
 	if (fg->s)
 	{
-		if (ft_num_len(j) , pad->blk)
+		if (ft_num_len(j) < pad->blk)
 		{
 			ft_pad(pad->blk - ft_num_len(j));
 			ft_putnbr(j);

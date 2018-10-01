@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 16:43:21 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/27 16:19:53 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/01 20:00:55 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -120,6 +120,6 @@ void	ft_recup_stats(char **av, t_flags fg)
 				ft_with_arg(dir, av[fg.start], ls, &fg);
 		}
 		fg.start = ft_recup_start(av);
-		ft_errno_13(av, fg.start);
+		ft_errno_13(av, fg);
 	}
 }
