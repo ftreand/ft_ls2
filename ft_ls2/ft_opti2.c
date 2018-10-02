@@ -83,13 +83,13 @@ void	ft_print_node(int j, int i, t_pad *pad, t_flags *fg)
 	}
 	if (fg->s)
 	{
-		if (ft_num_len(j) < pad->blk)
+		if (ft_num_len(j) < pad->blk || ft_num_len(j / 2) < pad->blk)
 		{
-			ft_pad(pad->blk - ft_num_len(j));
-			ft_putnbr(j);
+			fg->k ? ft_pad(pad->blk - ft_num_len(j / 2)) : ft_pad(pad->blk - ft_num_len(j));
+			fg->k ? ft_putnbr(j / 2) : ft_putnbr(j);
 		}
 		else
-			ft_putnbr(j);
+			fg->k ? ft_putnbr(j / 2) : ft_putnbr(j);
 		ft_putchar(' ');
 	}
 }

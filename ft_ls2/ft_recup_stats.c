@@ -58,6 +58,23 @@ void	ft_recup_full_path(char *path, char *av, struct dirent *dirent)
 	}
 }
 
+void	ft_init_ls(t_ls **ls)
+{
+	(*ls)->mode = NULL;
+	(*ls)->link = 0;
+	(*ls)->node = 0;
+	(*ls)->pw_name = NULL;
+	(*ls)->gr_name = NULL;
+	(*ls)->size = 0;
+	(*ls)->major = 0;
+	(*ls)->minor = 0;
+	(*ls)->total = 0;
+	(*ls)->time = 0;
+	(*ls)->type = 0;
+	(*ls)->next = NULL;
+	(*ls)->prev = NULL;
+}
+
 void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 {
 	t_fill	fill;
@@ -69,9 +86,10 @@ void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 		if (!ls)
 		{
 			ls = (t_ls*)malloc(sizeof(t_ls));
+			ft_init_ls(&ls);
 			(*begin) = ls;
-			ls->prev = NULL;
-			ls->next = NULL;
+//			ls->prev = NULL;
+///			ls->next = NULL;
 			ft_fill(ls, av, fill, fg);
 		}
 		else
@@ -94,23 +112,6 @@ void	ft_pad(int i)
 		ft_putchar(' ');
 		i--;
 	}
-}
-
-void	ft_init_ls(t_ls **ls)
-{
-	(*ls)->mode = NULL;
-	(*ls)->link = 0;
-	(*ls)->node = 0;
-	(*ls)->pw_name = NULL;
-	(*ls)->gr_name = NULL;
-	(*ls)->size = 0;
-	(*ls)->major = 0;
-	(*ls)->minor = 0;
-	(*ls)->total = 0;
-	(*ls)->time = 0;
-	(*ls)->type = 0;
-	(*ls)->next = NULL;
-	(*ls)->prev = NULL;
 }
 
 void	ft_recup_stats(char **av, t_flags fg)
