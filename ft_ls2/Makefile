@@ -46,7 +46,7 @@ $(LIBFT):
 
 %.o: %.c ./$(INCLUDES_PATH)/$(NAME).h
 	@ printf "\033[1mCompilation de \033[31m%-20s\033[37m\ten \033[34m%-20s\033[0m 🔥\n" $< $@
-	@ $(CC) $(CC_FLAGS) $(INCLUDES) -c $< -o $@
+	@ $(CC) $(CC_FLAGS) $(INCLUDES) -c $< -o $@ -g
 
 clean:
 	@/bin/rm -f $(OBJ)

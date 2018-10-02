@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 14:47:30 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/02 16:58:19 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,7 +52,7 @@ void	ft_display_l(t_ls *ls, t_pad *pad)
 	ft_putstr(ls->gr_name);
 	ft_strlen(ls->gr_name) < pad->gr ? ft_pad(pad->gr - ft_strlen(ls->gr_name)
 			+ 1) : ft_putchar(' ');
-	if (ls->mode[0] == 'c' || ls->mode[0] == 'b' || ft_strstr(ls->path, "dev"))
+	if (ls->mode[0] == 'c' || ls->mode[0] == 'b' || ft_strstr(ls->path, "dev/"))
 		ft_major_minor(ls);
 	else
 	{

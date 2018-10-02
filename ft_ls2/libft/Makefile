@@ -6,7 +6,7 @@
 #    By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/27 21:48:32 by ftreand      #+#   ##    ##    #+#        #
-#    Updated: 2018/10/02 15:30:17 by ftreand     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/02 16:22:11 by ftreand     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -88,7 +88,7 @@ $(NAME): $(OBJ)
 
 ./%.o: ./%.c
 	@ printf "\033[1mCompilation de \033[31m%-20s\033[37m\ten \033[34m%-20s\033[0m 🔥\n" $< $@
-	@gcc -Wall -Werror -Wextra -o $@ -c $<
+	@gcc -Wall -Werror -Wextra -o $@ -c $< -g
 
 clean:
 	@rm -f $(OBJ)

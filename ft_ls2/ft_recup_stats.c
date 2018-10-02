@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 16:43:21 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/01 20:00:55 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/02 16:57:06 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -96,6 +96,23 @@ void	ft_pad(int i)
 	}
 }
 
+void	ft_init_ls(t_ls **ls)
+{
+	(*ls)->mode = NULL;
+	(*ls)->link = 0;
+	(*ls)->node = 0;
+	(*ls)->pw_name = NULL;
+	(*ls)->gr_name = NULL;
+	(*ls)->size = 0;
+	(*ls)->major = 0;
+	(*ls)->minor = 0;
+	(*ls)->total = 0;
+	(*ls)->time = 0;
+	(*ls)->type = 0;
+	(*ls)->next = NULL;
+	(*ls)->prev = NULL;
+}
+
 void	ft_recup_stats(char **av, t_flags fg)
 {
 	t_ls	*ls;
@@ -104,6 +121,8 @@ void	ft_recup_stats(char **av, t_flags fg)
 	fg.nb_arg = 0;
 	fg.total = 0;
 	ls = NULL;
+//	ft_init_ls(&ls);
+//	ft_bzero(&ls, sizeof(t_ls));
 	ft_sort_av(av, &fg.nb_arg, fg);
 	if (fg.nb_arg == 0)
 		ft_no_arg(av[fg.start], ls, fg);
