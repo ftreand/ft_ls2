@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/29 15:36:40 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/01 21:41:44 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/02 14:31:03 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,8 +33,11 @@ void	ft_errno_13(char **av, t_flags fg)
 		{
 			if (fg.i)
 				ft_putchar('\n');
-			ft_putstr(av[fg.start]);
-			ft_putstr(":\n");
+			if (fg.nb_arg != 1)
+			{
+				ft_putstr(av[fg.start]);
+				ft_putstr(":\n");
+			}
 			ft_putstr("ls: ");
 			ft_putstr(av[fg.start]);
 			ft_putendl(": Permission denied");

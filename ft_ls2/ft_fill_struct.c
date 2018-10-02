@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/08 16:38:38 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/01 22:33:25 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/02 12:23:27 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,8 +55,11 @@ void	ft_fill_struct(t_ls *ls, t_fill *fill)
 	ls->mode = ft_recup_mode(fill->stats.st_mode);
 	ls->link = fill->stats.st_nlink;
 	ls->size = fill->stats.st_size;
-	ls->major = major(fill->stats.st_rdev);
-	ls->minor = minor(fill->stats.st_rdev);
+	if (ls->mode[0] == 'c' || ls->mode[0] == 'b')
+	{
+		ls->major = major(fill->stats.st_rdev);
+		ls->minor = minor(fill->stats.st_rdev);
+	}
 	ls->time = fill->stats.st_mtime;
 	ls->mode[0] == 'l' ? ft_recup_link(ls, fill->dirent->d_name) :
 			ft_strcpy(ls->d_name, fill->dirent->d_name);

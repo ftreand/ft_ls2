@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/21 15:03:58 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/01 22:56:17 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/02 12:04:44 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,7 +38,7 @@ void	ft_fill_pad(t_pad *pad, t_ls **ls, size_t (len)(const char *s))
 	pad->in = ft_num_len((*ls)->node) > pad->in ? ft_num_len((*ls)->node) :
 		pad->in;
 	pad->blk = ft_num_len((*ls)->block) > pad->blk ? ft_num_len((*ls)->block) :
-	pad->blk;
+		pad->blk;
 }
 
 int		ft_num_len(int lk)

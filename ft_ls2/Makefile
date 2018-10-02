@@ -28,6 +28,7 @@ SRC =		main.c\
 			ft_opti_recu2.c \
 			ft_display_color.c \
 			ft_display_color2.c \
+			ft_major_minor.c \
 
 INCLUDES_PATH = includes
 
@@ -44,7 +45,7 @@ $(LIBFT):
 	@make -C $(LIBFT_PATH)
 
 %.o: %.c ./$(INCLUDES_PATH)/$(NAME).h
-	@ printf "\033[1mCompilation de \033[36m%-20s\033[37m\ten \033[32m%-20s\033[0m ✅\n" $< $@
+	@ printf "\033[1mCompilation de \033[31m%-20s\033[37m\ten \033[34m%-20s\033[0m 🔥\n" $< $@
 	@ $(CC) $(CC_FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:

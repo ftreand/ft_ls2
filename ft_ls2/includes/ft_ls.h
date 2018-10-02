@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/01 22:55:48 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/02 14:27:30 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,8 +67,6 @@ typedef struct			s_pad
 	int					in;
 	int					blk;
 	int					size;
-//	int					minor;
-//	int					major;
 	size_t				name;
 }						t_pad;
 
@@ -148,4 +146,5 @@ void					ft_print_exec_file(char *s);
 void					ft_print_socket(char *s);
 void					ft_print_node(int j, int i, t_pad *pad, t_flags *fg);
 void					ft_print_blue_blue_bg(char *s);
+void					ft_major_minor(t_ls *ls);
 #endif

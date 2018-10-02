@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/06 15:43:15 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/01 23:02:15 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/02 14:47:30 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,9 +52,14 @@ void	ft_display_l(t_ls *ls, t_pad *pad)
 	ft_putstr(ls->gr_name);
 	ft_strlen(ls->gr_name) < pad->gr ? ft_pad(pad->gr - ft_strlen(ls->gr_name)
 			+ 1) : ft_putchar(' ');
-	ft_num_len(ls->size) < pad->size ? ft_pad(pad->size - ft_num_len(ls->size)
-			+ 1) : ft_putchar(' ');
-	ft_putnbr(ls->size);
+	if (ls->mode[0] == 'c' || ls->mode[0] == 'b' || ft_strstr(ls->path, "dev"))
+		ft_major_minor(ls);
+	else
+	{
+		ft_num_len(ls->size) < pad->size ? ft_pad(pad->size -
+				ft_num_len(ls->size) + 1) : ft_putchar(' ');
+		ft_putnbr(ls->size);
+	}
 	ft_putchar(' ');
 	ft_display_time(ls->time);
 	ft_putchar(' ');

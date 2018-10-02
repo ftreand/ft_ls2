@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/30 18:44:28 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/01 21:36:17 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/02 14:42:58 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ void	ft_error_flag(char er)
 	ft_putstr("ls: illegal option -- ");
 	ft_putchar(er);
 	ft_putchar('\n');
-	ft_putendl("usage: ls [-lRart] [file ...]");
+	ft_putendl("usage: ls [-RSaiklrst1] [file ...]");
 }
 
 char	ft_er_flag(char **av, int i, int j)
@@ -28,10 +28,7 @@ char	ft_er_flag(char **av, int i, int j)
 
 	c = av[i][j] != 'l' && av[i][j] != 'R' && av[i][j] != 'a' && av[i][j] !=
 		'r' && av[i][j] != 't' && av[i][j] != 'k' && av[i][j] != 'i' &&
-		av[i][j] != 's' && av[i][j] != 'S' && av[i][j] != '1'
-		&& av[i][j] != '-' ? av[i][j]
-		: '\0';
-	c = (av[i][j] == '-' && av[i][j + 1] != '\0') ? av[i][j] : c;
+		av[i][j] != 's' && av[i][j] != 'S' && av[i][j] != '1' ? av[i][j] : '\0';
 	return (c);
 }
 
