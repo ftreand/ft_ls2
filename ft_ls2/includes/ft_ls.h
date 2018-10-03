@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 16:54:47 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 16:21:30 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -98,7 +98,7 @@ void					ft_sort_av(char **av, int *i, t_flags fg);
 void					ft_recup_stats(char **av, t_flags fg);
 int						ft_recup_start(char **av);
 void					ft_display_wrong_dir(char **av, t_flags fg);
-t_pad					*ft_padding(t_ls **ls);
+t_pad					ft_padding(t_ls **ls);
 void					ft_fill_stats(DIR *dir, char *av,
 		t_ls**begin, t_flags *fg);
 int						ft_num_len(int i);

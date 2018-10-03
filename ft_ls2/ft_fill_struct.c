@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/08 16:38:38 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 16:29:07 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 17:03:13 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,6 +34,7 @@ void	ft_fill_pw(t_fill *fill, t_ls *ls)
 
 void	ft_recup_link(t_ls *ls, char *s)
 {
+	ft_bzero(ls->lk, sizeof(ls->lk));
 	readlink(ls->path, ls->lk, 4096);
 	ft_strcpy(ls->d_name, s);
 }

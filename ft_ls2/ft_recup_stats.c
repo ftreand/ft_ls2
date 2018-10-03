@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 16:43:21 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 16:57:06 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 17:03:49 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,46 +58,26 @@ void	ft_recup_full_path(char *path, char *av, struct dirent *dirent)
 	}
 }
 
-void	ft_init_ls(t_ls **ls)
-{
-	(*ls)->mode = NULL;
-	(*ls)->link = 0;
-	(*ls)->node = 0;
-	(*ls)->pw_name = NULL;
-	(*ls)->gr_name = NULL;
-	(*ls)->size = 0;
-	(*ls)->major = 0;
-	(*ls)->minor = 0;
-	(*ls)->total = 0;
-	(*ls)->time = 0;
-	(*ls)->type = 0;
-	(*ls)->next = NULL;
-	(*ls)->prev = NULL;
-}
-
 void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 {
 	t_fill	fill;
 	t_ls	*ls;
 	t_ls	*now;
 
+	ls = NULL;
+	now = NULL;
 	while ((fill.dirent = readdir(dir)) != NULL)
 	{
 		if (!ls)
 		{
 			ls = (t_ls*)malloc(sizeof(t_ls));
-			ft_init_ls(&ls);
 			(*begin) = ls;
-//			ls->prev = NULL;
-///			ls->next = NULL;
 			ft_fill(ls, av, fill, fg);
 		}
 		else
 		{
 			now = (t_ls*)malloc(sizeof(t_ls));
 			ls = now;
-			ls->next = NULL;
-			ls->prev = NULL;
 			ft_fill(ls, av, fill, fg);
 			ft_sort_list(&(*begin), ls, (*fg));
 		}
@@ -122,8 +102,6 @@ void	ft_recup_stats(char **av, t_flags fg)
 	fg.nb_arg = 0;
 	fg.total = 0;
 	ls = NULL;
-//	ft_init_ls(&ls);
-//	ft_bzero(&ls, sizeof(t_ls));
 	ft_sort_av(av, &fg.nb_arg, fg);
 	if (fg.nb_arg == 0)
 		ft_no_arg(av[fg.start], ls, fg);

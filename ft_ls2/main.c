@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/30 18:44:28 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 14:42:58 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 17:07:43 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,10 +84,12 @@ int		main(int ac, char **av)
 		fg.r = 0;
 		fg.t = 0;
 		fg.i = 0;
+		fg.in = 0;
 		fg.k = 0;
 		fg.s = 0;
 		fg.us = 0;
 		fg.one = 0;
+		fg.er = 0;
 		ft_manage_flag(av, &fg);
 		if (fg.er)
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 15:09:04 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 12:03:49 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 17:06:06 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,6 +16,8 @@
 
 void	ft_fill(t_ls *ls, char *av, t_fill fill, t_flags *fg)
 {
+	ls->prev = NULL;
+	ls->next = NULL;
 	ft_recup_full_path(ls->path, av, fill.dirent);
 	ft_fill_struct(&(*ls), &fill);
 	(!fg->a) && ls->d_name[0] == '.' ? fg->total :
@@ -32,13 +34,13 @@ void	ft_no_arg(char *av, t_ls *ls, t_flags fg)
 {
 	DIR		*dir;
 	t_ls	*padd;
-	t_pad	*pad;
+	t_pad	pad;
 
 	dir = opendir(".");
 	ft_fill_stats(dir, av, &ls, &fg);
 	padd = ls;
 	pad = ft_padding(&padd);
-	ft_display(ls, &fg, pad);
+	ft_display(ls, &fg, &pad);
 	if (fg.ur)
 		ft_recursive(&ls, fg, ".");
 	closedir(dir);
@@ -47,7 +49,7 @@ void	ft_no_arg(char *av, t_ls *ls, t_flags fg)
 void	ft_with_arg(DIR *dir, char *av, t_ls *ls, t_flags *fg)
 {
 	t_ls	*padd;
-	t_pad	*pad;
+	t_pad	pad;
 
 	ft_fill_stats(dir, av, &ls, &(*fg));
 	padd = ls;
@@ -61,7 +63,7 @@ void	ft_with_arg(DIR *dir, char *av, t_ls *ls, t_flags *fg)
 		ft_putstr(av);
 		ft_putendl(": ");
 	}
-	ft_display(ls, &(*fg), pad);
+	ft_display(ls, &(*fg), &pad);
 	if (fg->ur)
 		ft_recursive(&ls, (*fg), av);
 	closedir(dir);
@@ -85,7 +87,8 @@ void	ft_print_node(int j, int i, t_pad *pad, t_flags *fg)
 	{
 		if (ft_num_len(j) < pad->blk || ft_num_len(j / 2) < pad->blk)
 		{
-			fg->k ? ft_pad(pad->blk - ft_num_len(j / 2)) : ft_pad(pad->blk - ft_num_len(j));
+			fg->k ? ft_pad(pad->blk - ft_num_len(j / 2)) : ft_pad(pad->blk
+					- ft_num_len(j));
 			fg->k ? ft_putnbr(j / 2) : ft_putnbr(j);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/21 15:03:58 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 12:04:44 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 17:05:18 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,7 @@ int		ft_num_len(int lk)
 
 	i = 0;
 	if (!lk)
-		i++;
+		return (1);
 	while (lk)
 	{
 		lk /= 10;
@@ -56,31 +56,21 @@ int		ft_num_len(int lk)
 	return (i);
 }
 
-t_pad	*ft_padding(t_ls **ls)
+t_pad	ft_padding(t_ls **ls)
 {
-	t_pad *pad;
-	t_pad *ret;
+	t_pad pad;
 
-	pad = NULL;
-	if (!pad)
-	{
-		if (!(pad = (t_pad*)malloc(sizeof(t_pad))))
-			return (NULL);
-		pad->lk = ft_num_len((*ls)->link);
-		pad->pw = ft_strlen((*ls)->pw_name);
-		pad->gr = ft_strlen((*ls)->gr_name);
-		pad->in = ft_num_len((*ls)->node);
-		pad->size = ft_num_len((*ls)->size);
-		pad->name = ft_strlen((*ls)->d_name);
-		pad->blk = ft_num_len((*ls)->block);
-		*ls = (*ls)->next;
-	}
+	pad.lk = 0;
+	pad.pw = 0;
+	pad.gr = 0;
+	pad.in = 0;
+	pad.size = 0;
+	pad.name = 0;
+	pad.blk = 0;
 	while (*ls != NULL)
 	{
-		ft_fill_pad(&(*pad), ls, ft_strlen);
+		ft_fill_pad(&pad, ls, ft_strlen);
 		*ls = (*ls)->next;
 	}
-	ret = pad;
-	free(pad);
-	return (ret);
+	return (pad);
 }

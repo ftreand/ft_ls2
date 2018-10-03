@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 16:58:34 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/01 19:11:20 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 16:27:42 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 
 void	ft_opti_recu0(t_flags fg, t_ls **ls, t_ls *padd, t_ls *begin)
 {
-	t_pad *pad;
+	t_pad pad;
 
 	if (!fg.a)
 	{
@@ -28,7 +28,7 @@ void	ft_opti_recu0(t_flags fg, t_ls **ls, t_ls *padd, t_ls *begin)
 	pad = ft_padding(&padd);
 	ft_print_base((*ls)->path);
 	if (fg.i)
-		ft_display(begin, &fg, pad);
+		ft_display(begin, &fg, &pad);
 }
 
 void	ft_manage_reverse(t_ls **ls)
