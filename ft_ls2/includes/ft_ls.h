@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/18 14:41:59 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/03 16:21:30 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/09 14:12:05 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,8 @@
 # include <time.h>
 # include <errno.h>
 # include <string.h>
+# include <sys/acl.h>
+# include <sys/xattr.h>
 
 typedef struct dirent	t_dir;
 typedef struct stat		t_st;
@@ -108,7 +110,7 @@ void					ft_pad(int i);
 void					ft_display_time(long mtime);
 void					ft_recursive(t_ls **ls, t_flags fg, char *path);
 void					ft_fill_struct(t_ls *ls, t_fill *fill);
-char					*ft_recup_mode(mode_t st_mode);
+char					*ft_recup_mode(mode_t st_mode, char *path);
 void					ft_recup_full_path(char *path, char *av
 		, struct dirent *dirent);
 void					ft_recup_recu_path(char *ret, char *path, char *name);
@@ -147,4 +149,6 @@ void					ft_print_socket(char *s);
 void					ft_print_node(int j, int i, t_pad *pad, t_flags *fg);
 void					ft_print_blue_blue_bg(char *s);
 void					ft_major_minor(t_ls *ls);
+int						ft_get_acl(char *s);
+int						ft_get_xattr(char *s);
 #endif

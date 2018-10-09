@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 16:43:21 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/03 17:03:49 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/09 14:15:20 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "includes/ft_ls.h"
 #include <stdio.h>
 
-char	*ft_recup_mode(mode_t st_mode)
+char	*ft_recup_mode(mode_t st_mode, char *path)
 {
 	char str[12];
 	char *res;
@@ -36,7 +36,8 @@ char	*ft_recup_mode(mode_t st_mode)
 	str[8] = st_mode & S_IWOTH ? 'w' : '-';
 	str[9] = st_mode & S_IXOTH ? 'x' : '-';
 	str[9] = st_mode & S_ISVTX ? 't' : str[9];
-	str[10] = ' ';
+	str[10] = ft_get_acl(path) ? '+' : ' ';
+	str[10] = ft_get_xattr(path) ? '@' : str[10];
 	str[11] = '\0';
 	res = ft_strdup(str);
 	return (res);
@@ -68,6 +69,7 @@ void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 	now = NULL;
 	while ((fill.dirent = readdir(dir)) != NULL)
 	{
+		printf("dtp = %d\n", fill.dirent->d_type);
 		if (!ls)
 		{
 			ls = (t_ls*)malloc(sizeof(t_ls));

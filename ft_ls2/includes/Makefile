@@ -29,7 +29,6 @@ SRC =		main.c\
 			ft_display_color.c \
 			ft_display_color2.c \
 			ft_major_minor.c \
-			ft_acl.c \
 
 INCLUDES_PATH = includes
 

@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/08 16:38:38 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/03 17:03:13 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/09 14:16:49 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,7 +53,7 @@ void	ft_fill_struct(t_ls *ls, t_fill *fill)
 	ls->type = fill->dirent->d_type;
 	ls->node = fill->stats.st_ino;
 	ls->block = (int)fill->stats.st_blocks;
-	ls->mode = ft_recup_mode(fill->stats.st_mode);
+	ls->mode = ft_recup_mode(fill->stats.st_mode, ls->path);
 	ls->link = fill->stats.st_nlink;
 	ls->size = fill->stats.st_size;
 	if (ls->mode[0] == 'c' || ls->mode[0] == 'b')
