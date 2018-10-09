@@ -6,7 +6,7 @@
 /*   By: ftreand <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 16:43:21 by ftreand      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/09 14:15:20 by ftreand     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/09 14:18:56 by ftreand     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,7 +69,6 @@ void	ft_fill_stats(DIR *dir, char *av, t_ls **begin, t_flags *fg)
 	now = NULL;
 	while ((fill.dirent = readdir(dir)) != NULL)
 	{
-		printf("dtp = %d\n", fill.dirent->d_type);
 		if (!ls)
 		{
 			ls = (t_ls*)malloc(sizeof(t_ls));
